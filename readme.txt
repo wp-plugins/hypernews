@@ -22,5 +22,7 @@ Now reload the entry page and start working with your RSS-streams as news to you
 == Screenshots ==
 
 1. News listing with tools to read, unread, mark as favorite, hide, publish as draft and make a note.
+2. Add links to specific link category in your ordinary WordPress Link.
+3. In Hypernews Settings, set the same link category name. Then reload page with "fetch" and you are ready to go!
 
 
