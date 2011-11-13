@@ -3,7 +3,7 @@
 Plugin Name: Hypernews
 Plugin URI: http://wordpress.org/extend/plugins/hypernews
 Description: Feedreader
-Version: 0.2
+Version: 0.2.1
 Author: Hypernode AB
 Author URI: http://www.hypernode.se
 License: MIT
@@ -28,7 +28,7 @@ register_activation_hook( __FILE__, array( 'HypernewsInstall', 'install' ) );
 add_action('admin_menu', 'hn_add_menu');
 function hn_add_menu(){
     add_menu_page( 'Hypernews', 'Hypernews', 'edit_posts', 'hypernews', 'hypernews_main', WP_PLUGIN_URL.'/hypernews/img/feed.png' );
-    add_submenu_page( 'hypernews', 'Hypernews Settings', 'Inställningar', 'edit_posts', 'hypernews_settings', 'hypernews_settings' );
+    add_submenu_page( 'hypernews', 'Hypernews Settings', _e('Settings', 'hypernews'), 'edit_posts', 'hypernews_settings', 'hypernews_settings' );
     
 }
 

@@ -39,11 +39,11 @@ class Hypernews_List extends WP_List_Table
                 }
                 ?>
 
-                <input type="submit" class="button-primary" value="<?php _e('Reload page') ?>" />
+                <input type="submit" class="button-primary" value="<?php _e('Reload page', 'hypernews') ?>" />
                 &nbsp;&nbsp;
-                <input type="checkbox" name="hidden" value="true" /> <?php _e('Show hidden') ?>
+                <input type="checkbox" name="hidden" value="true" /> <?php _e('Show hidden', 'hypernews') ?>
                 &nbsp;&nbsp;
-                <input type="checkbox" name="fetch" value="true" /> <?php _e('Fetch new items from RSS Stream') ?>
+                <input type="checkbox" name="fetch" value="true" /> <?php _e('Fetch new items from RSS Stream', 'hypernews') ?>
                 <input type="hidden" name="hypernews-reload" value="true" />
 
                  <?php
@@ -63,10 +63,10 @@ function get_columns() {
 
     return $columns= array(
         'status'=>'<img src="'.WP_PLUGIN_URL.'/hypernews/img/tag.png" />',
-        'title'=>__('Headline'),
-        'pubdate'=>__('Published'),
-        'source'=>__('Source'),
-        'notes'=>__('Note')
+        'title'=>__('Headline', 'hypernews'),
+        'pubdate'=>__('Published', 'hypernews'),
+        'source'=>__('Source', 'hypernews'),
+        'notes'=>__('Note', 'hypernews')
     );
 }
     
@@ -160,7 +160,7 @@ function publish_channel($id)
             $result.='&nbsp;&nbsp;&nbsp;&nbsp;';
         }
         
-        $result.='<a href="#" row_id="'.$id.'" posttype="'.$type.'" class="hypernews_publish_row" title="'.__('Add as draft to').' '.$type.'"><img src="'.WP_PLUGIN_URL.'/hypernews/img/page_white_add.png" /> '.$type.'</a>';
+        $result.='<a href="#" row_id="'.$id.'" posttype="'.$type.'" class="hypernews_publish_row" title="'.__('Add as draft to', 'hypernews').' '.$type.'"><img src="'.WP_PLUGIN_URL.'/hypernews/img/page_white_add.png" /> '.$type.'</a>';
     }
     
     
@@ -200,10 +200,10 @@ function display_rows() {
                             case "id": echo '<td '.$attributes.'>'.stripslashes($rec->id).'</td>';	break;
                             case "title": 
                                 $actions = array(
-                                    'edit'      => sprintf('<a href="#" class="hypernews_edit_row" row_id="%3$s">'.__('Show').'</a>',$_REQUEST['page'],'edit',$rec->id),
-                                    'unread'      => sprintf('<a href="#" class="hypernews_unread_row" row_id="%3$s">'.__('Unread').'</a>',$_REQUEST['page'],'unread',$rec->id),
-                                    'star' => sprintf('<a href="#" class="hypernews_star_row" row_id="%3$s">'.__('Favorite').'</a>',$_REQUEST['page'],'star',$rec->id),
-                                    'hide'    => sprintf('<a href="#" class="hypernews_hide_row" row_id="%3$s">'.__('Hide').'</a>',$_REQUEST['page'],'hide',$rec->id)
+                                    'edit'      => sprintf('<a href="#" class="hypernews_edit_row" row_id="%3$s">'.__('Show', 'hypernews').'</a>',$_REQUEST['page'],'edit',$rec->id),
+                                    'unread'      => sprintf('<a href="#" class="hypernews_unread_row" row_id="%3$s">'.__('Unread', 'hypernews').'</a>',$_REQUEST['page'],'unread',$rec->id),
+                                    'star' => sprintf('<a href="#" class="hypernews_star_row" row_id="%3$s">'.__('Favorite', 'hypernews').'</a>',$_REQUEST['page'],'star',$rec->id),
+                                    'hide'    => sprintf('<a href="#" class="hypernews_hide_row" row_id="%3$s">'.__('Hide', 'hypernews').'</a>',$_REQUEST['page'],'hide',$rec->id)
                                 );
 
                                 //Return the title contents
@@ -257,7 +257,7 @@ function display_rows() {
                                 break;
                             case "notes": 	
                                 
-                                echo sprintf('<td %3$s><div id="hypernews_row_notetext_%2$s">%1$s</div><br/><div class="hypernews_hidden_row hypernews_row_%2$s"><textarea id="hypernews_row_notearea_%2$s">%1$s</textarea><br/><input type="button" value="'.__('Update').'" row_id="%2$s" class="hypernews_row_note button-primary" /></div></td>',
+                                echo sprintf('<td %3$s><div id="hypernews_row_notetext_%2$s">%1$s</div><br/><div class="hypernews_hidden_row hypernews_row_%2$s"><textarea id="hypernews_row_notearea_%2$s">%1$s</textarea><br/><input type="button" value="'.__('Update', 'hypernews').'" row_id="%2$s" class="hypernews_row_note button-primary" /></div></td>',
                                         stripslashes($rec->notes),
                                         $rec->id,
                                         $attributes

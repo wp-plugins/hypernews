@@ -36,28 +36,28 @@ function hypernews_settings() {
     
 ?>
     <div class="wrap">
-        <div id="icon-options-general" class="icon32"><br/></div><h2><?php _e('Settings'); ?></h2>
+        <div id="icon-options-general" class="icon32"><br/></div><h2><?php _e('Settings', 'hypernews'); ?></h2>
         
         <form method="post" >
             
             <table class="form-table">
                 <tr valign="top">
-                    <th scope="row"><?php _e('Link category name:'); ?></th>
-                    <td><input type="text" name="hypernews-category" value="<?php echo $hypernews_settings['category']; ?>" /> <?php _e('Match this with "Link Category" !'); ?></td>
+                    <th scope="row"><?php _e('Link category name:', 'hypernews'); ?></th>
+                    <td><input type="text" name="hypernews-category" value="<?php echo $hypernews_settings['category']; ?>" /> <?php _e('Match this with "Link Category" !', 'hypernews'); ?></td>
                 </tr>
 
                 <tr valign="top">
                     <th scope="row"><?php _e('Interval:'); ?></th>
-                    <td><input type="text" name="hypernews-interval" value="<?php echo $hypernews_settings['interval']; ?>" /> <?php _e('seconds'); ?></td>
+                    <td><input type="text" name="hypernews-interval" value="<?php echo $hypernews_settings['interval']; ?>" /> <?php _e('seconds', 'hypernews'); ?></td>
                 </tr>
                 
                 <tr valign="top">
-                    <th scope="row"><?php _e('Show max chars:'); ?></th>
+                    <th scope="row"><?php _e('Show max chars:', 'hypernews'); ?></th>
                     <td><input type="text" name="hypernews-maxchars" value="<?php echo $hypernews_settings['maxchars']; ?>" /></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row"><?php _e('Publish to:'); ?></th>
+                    <th scope="row"><?php _e('Publish to:', 'hypernews'); ?></th>
                     <td>
                         <?php
                             $post_types=get_post_types('','names'); 
@@ -78,7 +78,7 @@ function hypernews_settings() {
             </table>
 
             <p class="submit">
-            <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+            <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'hypernews') ?>" />
             <input type="hidden" name="hypernews-update" value="true" />
             </p>
             

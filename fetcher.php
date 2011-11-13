@@ -67,7 +67,7 @@ class Hypernews_Fetcher
 
                 $reload = true;
                 
-                $result.= $bm->link_name.' => '.__('Loaded').'<br/>';
+                $result.= $bm->link_name.' => '.__('Loaded', 'hypernews').'<br/>';
             }
             else
             {
