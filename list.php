@@ -39,18 +39,18 @@ class Hypernews_List extends WP_List_Table
                 }
                 ?>
 
-                <input type="submit" class="button-primary" value="<?php _e('Ladda om sidan') ?>" />
+                <input type="submit" class="button-primary" value="<?php _e('Reload page') ?>" />
                 &nbsp;&nbsp;
-                <input type="checkbox" name="hidden" value="true" /> <?php _e('Visa dolda') ?>
+                <input type="checkbox" name="hidden" value="true" /> <?php _e('Show hidden') ?>
                 &nbsp;&nbsp;
-                <input type="checkbox" name="fetch" value="true" /> <?php _e('Hämta nyheter') ?>
+                <input type="checkbox" name="fetch" value="true" /> <?php _e('Fetch new items from RSS Stream') ?>
                 <input type="hidden" name="hypernews-reload" value="true" />
 
                  <?php
             }
             if ( $which == "bottom" ){
                     //The code that goes after the table is there
-                    echo"Hi, I'm after the table";
+                    echo " ";
             }
     }
 
@@ -63,10 +63,10 @@ function get_columns() {
 
     return $columns= array(
         'status'=>'<img src="'.WP_PLUGIN_URL.'/hypernews/img/tag.png" />',
-        'title'=>__('Rubrik'),
-        'pubdate'=>__('Publicerad'),
-        'source'=>__('Källa'),
-        'notes'=>__('Notering')
+        'title'=>__('Headline'),
+        'pubdate'=>__('Published'),
+        'source'=>__('Source'),
+        'notes'=>__('Note')
     );
 }
     
@@ -160,7 +160,7 @@ function publish_channel($id)
             $result.='&nbsp;&nbsp;&nbsp;&nbsp;';
         }
         
-        $result.='<a href="#" row_id="'.$id.'" posttype="'.$type.'" class="hypernews_publish_row" title="'.__('Lägg till som draft i ').$type.'"><img src="'.WP_PLUGIN_URL.'/hypernews/img/page_white_add.png" /> '.$type.'</a>';
+        $result.='<a href="#" row_id="'.$id.'" posttype="'.$type.'" class="hypernews_publish_row" title="'.__('Add as draft to').' '.$type.'"><img src="'.WP_PLUGIN_URL.'/hypernews/img/page_white_add.png" /> '.$type.'</a>';
     }
     
     
@@ -201,9 +201,9 @@ function display_rows() {
                             case "title": 
                                 $actions = array(
                                     'edit'      => sprintf('<a href="#" class="hypernews_edit_row" row_id="%3$s">'.__('Show').'</a>',$_REQUEST['page'],'edit',$rec->id),
-                                    'unread'      => sprintf('<a href="#" class="hypernews_unread_row" row_id="%3$s">'.__('Oläst').'</a>',$_REQUEST['page'],'unread',$rec->id),
-                                    'star' => sprintf('<a href="#" class="hypernews_star_row" row_id="%3$s">'.__('Markera som favorit').'</a>',$_REQUEST['page'],'star',$rec->id),
-                                    'hide'    => sprintf('<a href="#" class="hypernews_hide_row" row_id="%3$s">'.__('Dölj').'</a>',$_REQUEST['page'],'hide',$rec->id)
+                                    'unread'      => sprintf('<a href="#" class="hypernews_unread_row" row_id="%3$s">'.__('Unread').'</a>',$_REQUEST['page'],'unread',$rec->id),
+                                    'star' => sprintf('<a href="#" class="hypernews_star_row" row_id="%3$s">'.__('Favorite').'</a>',$_REQUEST['page'],'star',$rec->id),
+                                    'hide'    => sprintf('<a href="#" class="hypernews_hide_row" row_id="%3$s">'.__('Hide').'</a>',$_REQUEST['page'],'hide',$rec->id)
                                 );
 
                                 //Return the title contents

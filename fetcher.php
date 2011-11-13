@@ -12,6 +12,8 @@ class Hypernews_Fetcher
     {
         global $wpdb;
         
+        $result = '';
+        
         $hypernews_settings = get_option( 'hypernews-settings');
         $cat = $hypernews_settings['category'];
         
@@ -65,11 +67,11 @@ class Hypernews_Fetcher
 
                 $reload = true;
                 
-                echo $bm->link_name.' loaded  ';
+                $result.= $bm->link_name.' => '.__('Loaded').'<br/>';
             }
             else
             {
-                echo $rss->get_error_message();
+                $result .= $bm->link_name.' => '.$rss->get_error_message() .'<br/>';
             }
         }
 
@@ -78,6 +80,9 @@ class Hypernews_Fetcher
             //echo "<meta http-equiv='refresh' content='0'>";
             //exit;
         }
+        
+        echo '<div id="message" class="updated">' . $result . '</div>';
+        
         
     }
 }

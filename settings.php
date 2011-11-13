@@ -36,28 +36,28 @@ function hypernews_settings() {
     
 ?>
     <div class="wrap">
-        <div id="icon-options-general" class="icon32"><br/></div><h2><?php _e('Inställningar'); ?></h2>
+        <div id="icon-options-general" class="icon32"><br/></div><h2><?php _e('Settings'); ?></h2>
         
         <form method="post" >
             
             <table class="form-table">
                 <tr valign="top">
-                    <th scope="row"><?php _e('Kategorinamn:'); ?></th>
-                    <td><input type="text" name="hypernews-category" value="<?php echo $hypernews_settings['category']; ?>" /></td>
+                    <th scope="row"><?php _e('Link category name:'); ?></th>
+                    <td><input type="text" name="hypernews-category" value="<?php echo $hypernews_settings['category']; ?>" /> <?php _e('Match this with "Link Category" !'); ?></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row"><?php _e('Intervall:'); ?></th>
-                    <td><input type="text" name="hypernews-interval" value="<?php echo $hypernews_settings['interval']; ?>" /> <?php _e('sekunder'); ?></td>
+                    <th scope="row"><?php _e('Interval:'); ?></th>
+                    <td><input type="text" name="hypernews-interval" value="<?php echo $hypernews_settings['interval']; ?>" /> <?php _e('seconds'); ?></td>
                 </tr>
                 
                 <tr valign="top">
-                    <th scope="row"><?php _e('Visa antal tecken:'); ?></th>
+                    <th scope="row"><?php _e('Show max chars:'); ?></th>
                     <td><input type="text" name="hypernews-maxchars" value="<?php echo $hypernews_settings['maxchars']; ?>" /></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row"><?php _e('Direktpublicering:'); ?></th>
+                    <th scope="row"><?php _e('Publish to:'); ?></th>
                     <td>
                         <?php
                             $post_types=get_post_types('','names'); 

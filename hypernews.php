@@ -16,6 +16,13 @@ include_once('fetcher.php');
 include_once('list.php');
 include_once('ajax.php');
 
+/**
+ * Localize plugin
+*/
+$dir = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+load_plugin_textdomain('hypernews', $dir);
+        
+
 register_activation_hook( __FILE__, array( 'HypernewsInstall', 'install' ) );
 
 add_action('admin_menu', 'hn_add_menu');
@@ -65,7 +72,7 @@ function hypernews_main()
 {
     echo '<div class="wrap">';
     
-    
+    echo '<h2>Hypernews</h2>';
     echo '<form method="post">';
     
     //Prepare Table of elements
