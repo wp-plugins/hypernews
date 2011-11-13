@@ -1,6 +1,6 @@
 === Hypernews ===
 Contributors: EkAndreas 
-Tags: News,RSS,Flow,Monitor,Publish,Editorial
+Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.2
 Stable tag: 0.2
