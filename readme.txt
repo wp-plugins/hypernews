@@ -17,6 +17,8 @@ Your Hypernews ui will now fetch and list your feeds. Keep track of which items 
 
 If you want to edit them in Wordpress click on the post type links at each item row. The content will be saved as draft posts for later edit.
 
+[youtube http://www.youtube.com/watch?v=eh_2ZQY3O0A]
+
 Note that this version just is a beta version and more will follow, like multi channel, search words, etc.
 
 Hypernews is tested with/without network installation and seems to work fine.
