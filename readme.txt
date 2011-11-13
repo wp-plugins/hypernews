@@ -37,6 +37,8 @@ Max Chars is how many chars to show in each item description.
 
 Now reload the entry page and start working with your RSS-streams as news to your site/blog.
 
+Please contact me at Twitter account @EkAndreas with questions and request of features!
+
 == Screenshots ==
 
 1. News listing with tools to read, unread, mark as favorite, hide, publish as draft and make a note.
