@@ -3,11 +3,18 @@
 Plugin Name: Hypernews
 Plugin URI: http://wordpress.org/extend/plugins/hypernews
 Description: Feedreader
-Version: 0.2.1
+Version: 0.2.2
 Author: Hypernode AB
 Author URI: http://www.hypernode.se
 License: MIT
 */
+
+/**
+ * Localize plugin
+*/
+load_plugin_textdomain( 'hypernews', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+
 include_once(ABSPATH . WPINC . '/feed.php');
 
 include_once('settings.php');
@@ -16,12 +23,6 @@ include_once('fetcher.php');
 include_once('list.php');
 include_once('ajax.php');
 
-/**
- * Localize plugin
-*/
-$dir = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
-load_plugin_textdomain('hypernews', $dir);
-        
 
 register_activation_hook( __FILE__, array( 'HypernewsInstall', 'install' ) );
 

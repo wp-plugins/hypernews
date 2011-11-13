@@ -3,7 +3,7 @@ Contributors: EkAndreas
 Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.2
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
@@ -18,6 +18,8 @@ Your Hypernews ui will now fetch and list your feeds. Keep track of which items 
 If you want to edit them in Wordpress click on the post type links at each item row. The content will be saved as draft posts for later edit.
 
 Note that this version just is a beta version and more will follow, like multi channel, search words, etc.
+
+Please contact us at Twitter account @EkAndreas with questions and request of features!
 
 == Installation ==
 
@@ -37,7 +39,7 @@ Max Chars is how many chars to show in each item description.
 
 Now reload the entry page and start working with your RSS-streams as news to your site/blog.
 
-Please contact me at Twitter account @EkAndreas with questions and request of features!
+Please contact us at Twitter account @EkAndreas with questions and request of features!
 
 == Screenshots ==
 
@@ -45,4 +47,10 @@ Please contact me at Twitter account @EkAndreas with questions and request of fe
 2. Add links to specific link category in your ordinary WordPress Link.
 3. In Hypernews Settings, set the same link category name. Then reload page with "fetch" and you are ready to go!
 
+== Changelog ==
 
+= 0.2.1 =
+* First beta version
+
+= 0.2.2 =
+* Getting the localization files to work
