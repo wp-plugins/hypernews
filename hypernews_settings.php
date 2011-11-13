@@ -14,6 +14,19 @@ function hypernews_maxchars()
     }
 }
 
+function hypernews_maxage()
+{
+   
+    $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
+    if (is_numeric($hypernews_settings['maxage']))
+    {
+        return $hypernews_settings['maxage'];
+    }
+    else
+    {
+        return 168;
+    }
+}
 
 function hypernews_settings() {
     // GLOBALS
@@ -21,7 +34,7 @@ function hypernews_settings() {
     global $current_user; get_currentuserinfo(); // get current user info
     
     $hypernews_settings = array('category' => 'Hypernews',
-        'interval' => '30', 'maxchars' => '255' );
+        'interval' => '30', 'maxchars' => '255', 'maxage' => '168' );
 
     $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
     
@@ -30,6 +43,7 @@ function hypernews_settings() {
         $hypernews_settings['category'] = $_REQUEST['hypernews-category'];
         $hypernews_settings['interval'] = $_REQUEST['hypernews-interval'];
         $hypernews_settings['maxchars'] = $_REQUEST['hypernews-maxchars'];        
+        $hypernews_settings['maxage'] = $_REQUEST['hypernews-maxage'];        
         $hypernews_settings['posttypes'] = $_REQUEST['hypernews-posttypes'];
         update_option('hypernews-settings', $hypernews_settings);
     }
@@ -55,6 +69,11 @@ function hypernews_settings() {
                 <tr valign="top">
                     <th scope="row"><?php _e('Show max chars:', 'hypernews'); ?></th>
                     <td><input type="text" name="hypernews-maxchars" value="<?php echo $hypernews_settings['maxchars']; ?>" /></td>
+                </tr>
+
+                <tr valign="top">
+                    <th scope="row"><?php _e('Delete RSS-items older than:', 'hypernews'); ?></th>
+                    <td><input type="text" name="hypernews-maxage" value="<?php echo $hypernews_settings['maxage']; ?>" /> hours.</td>
                 </tr>
 
                 <tr valign="top">

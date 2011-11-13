@@ -72,17 +72,25 @@ class Hypernews_Fetcher
             else
             {
                 $result .= $bm->link_name.' => '.$rss->get_error_message() .'<br/>';
+                $reload = false;
+                break;
             }
         }
 
-        if ($reload)
-        {
-            //echo "<meta http-equiv='refresh' content='0'>";
-            //exit;
-        }
-        
         echo '<div id="message" class="updated">' . $result . '</div>';
         
+        if ($reload)
+        {
+            $sql = "
+            DELETE FROM ".$this->tablename()." 
+            WHERE pubdate < DATE_SUB(NOW(), INTERVAL " .  hypernews_maxage() . " HOUR);
+            ";
+
+            $wpdb->query( $sql );
+
+            echo "<meta http-equiv='refresh' content='0'>";
+            exit;
+        }
         
     }
 }
