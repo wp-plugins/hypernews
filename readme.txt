@@ -19,6 +19,10 @@ If you want to edit them in Wordpress click on the post type links at each item 
 
 Note that this version just is a beta version and more will follow, like multi channel, search words, etc.
 
+Hypernews is tested with/without network installation and seems to work fine.
+
+Primary language is Swedish so please support me with correct language updates if you find this plugin useful!
+
 Please contact us at Twitter account @EkAndreas with questions and request of features!
 
 == Installation ==
