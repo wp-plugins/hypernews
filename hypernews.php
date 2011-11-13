@@ -3,7 +3,7 @@
 Plugin Name: Hypernews
 Plugin URI: http://wordpress.org/extend/plugins/hypernews
 Description: Feedreader
-Version: 0.2.4
+Version: 0.2.5
 Author: Hypernode AB
 Author URI: http://www.hypernode.se
 License: MIT

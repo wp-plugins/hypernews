@@ -3,7 +3,7 @@ Contributors: EkAndreas
 Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.2
-Stable tag: 0.2.4
+Stable tag: 0.2.5
 
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
@@ -69,4 +69,7 @@ Please contact us at Twitter account @EkAndreas with questions and request of fe
 = 0.2.4 =
 * Max age added to settings, deletes rss-items older than nnn hours.
 * Reload issue fixed.
+
+= 0.2.5 =
+* Fix to language files
  
