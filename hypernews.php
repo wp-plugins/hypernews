@@ -3,7 +3,7 @@
 Plugin Name: Hypernews
 Plugin URI: http://wordpress.org/extend/plugins/hypernews
 Description: Feedreader
-Version: 0.2.2
+Version: 0.2.3
 Author: Hypernode AB
 Author URI: http://www.hypernode.se
 License: MIT
@@ -13,24 +13,21 @@ License: MIT
  * Localize plugin
 */
 load_plugin_textdomain( 'hypernews', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
-
+    
 include_once(ABSPATH . WPINC . '/feed.php');
-
-include_once('settings.php');
-include_once('installer.php');
-include_once('fetcher.php');
-include_once('list.php');
-include_once('ajax.php');
-
+include_once('hypernews_settings.php');
+include_once('hypernews_installer.php');
+include_once('hypernews_fetcher.php');
+include_once('hypernews_list.php');
+include_once('hypernews_ajax.php');
 
 register_activation_hook( __FILE__, array( 'HypernewsInstall', 'install' ) );
-
 add_action('admin_menu', 'hn_add_menu');
-function hn_add_menu(){
+function hn_add_menu()
+{
+    global $current_user;
     add_menu_page( 'Hypernews', 'Hypernews', 'edit_posts', 'hypernews', 'hypernews_main', WP_PLUGIN_URL.'/hypernews/img/feed.png' );
     add_submenu_page( 'hypernews', 'Hypernews Settings', __('Settings', 'hypernews'), 'edit_posts', 'hypernews_settings', 'hypernews_settings' );
-    
 }
 
 /*
@@ -48,12 +45,6 @@ function admin_register_head() {
 }
 
 add_action('admin_init', 'hypernews_script');
-#add_action('wp_ajax_hypernews_set_group', ajax_set_group);
-#add_action('wp_ajax_hypernews_get_group', ajax_get_group);
-
-/*
- *  Add Ajax into our setting page
- */
 function hypernews_script() {
 
     $src = WP_PLUGIN_URL . '/hypernews/js/hypernews.js';
@@ -62,12 +53,8 @@ function hypernews_script() {
     wp_enqueue_script('hypernewsAjax');
     wp_localize_script('hypernewsAjax','hypernewsAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
     
-    wp_enqueue_script("myUi","https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js");
-    //wp_enqueue_script('jquery-ui-core');
-    
+    wp_enqueue_script("jquery-ui","https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js");
 }
-
-
 
 function hypernews_main() 
 {
