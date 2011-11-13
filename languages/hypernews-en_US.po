@@ -1,0 +1,127 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Andreas Ek <andreas@hypernode.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ default
+#: fetcher.php:70
+msgid "Loaded"
+msgstr "Loaded"
+
+#@ default
+#: list.php:42
+msgid "Reload page"
+msgstr "Reload page"
+
+#@ default
+#: list.php:44
+msgid "Show hidden"
+msgstr "Show hidden"
+
+#@ default
+#: list.php:46
+msgid "Fetch new items from RSS Stream"
+msgstr "Fetch new items from RSS Stream"
+
+#@ default
+#: list.php:66
+msgid "Headline"
+msgstr "Headline"
+
+#@ default
+#: list.php:67
+msgid "Published"
+msgstr "Published"
+
+#@ default
+#: list.php:68
+msgid "Source"
+msgstr "Source"
+
+#@ default
+#: list.php:69
+msgid "Note"
+msgstr "Note"
+
+#@ default
+#: list.php:163
+msgid "Add as draft to"
+msgstr "Add as draft to"
+
+#@ default
+#: list.php:203
+msgid "Show"
+msgstr "Show"
+
+#@ default
+#: list.php:204
+msgid "Unread"
+msgstr "Unread"
+
+#@ default
+#: list.php:205
+msgid "Favorite"
+msgstr "Favorite"
+
+#@ default
+#: list.php:206
+msgid "Hide"
+msgstr "Hide"
+
+#@ default
+#: list.php:260
+msgid "Update"
+msgstr "Update"
+
+#@ default
+#: settings.php:39
+msgid "Settings"
+msgstr "Settings"
+
+#@ default
+#: settings.php:45
+msgid "Link category name:"
+msgstr "Link category name:"
+
+#@ default
+#: settings.php:46
+msgid "Match this with \"Link Category\" !"
+msgstr "Match this with \"Link Category\" !"
+
+#@ default
+#: settings.php:50
+msgid "Interval:"
+msgstr "Interval:"
+
+#@ default
+#: settings.php:51
+msgid "seconds"
+msgstr "seconds"
+
+#@ default
+#: settings.php:55
+msgid "Show max chars:"
+msgstr "Show max chars:"
+
+#@ default
+#: settings.php:60
+msgid "Publish to:"
+msgstr "Publish to:"
+
+#@ default
+#: settings.php:81
+msgid "Save Changes"
+msgstr "Save Changes"
+
