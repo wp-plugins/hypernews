@@ -73,7 +73,7 @@ function hypernews_settings() {
 
                 <tr valign="top">
                     <th scope="row"><?php _e('Delete RSS-items older than:', 'hypernews'); ?></th>
-                    <td><input type="text" name="hypernews-maxage" value="<?php echo $hypernews_settings['maxage']; ?>" /> hours.</td>
+                    <td><input type="text" name="hypernews-maxage" value="<?php echo $hypernews_settings['maxage']; ?>" /> <?php _e('hours', 'hypernews'); ?></td>
                 </tr>
 
                 <tr valign="top">
