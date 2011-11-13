@@ -47,9 +47,13 @@ Please contact us at Twitter account @EkAndreas with questions and request of fe
 
 == Screenshots ==
 
-1. News listing with tools to read, unread, mark as favorite, hide, publish as draft and make a note.
-2. Add links to specific link category in your ordinary WordPress Link.
-3. In Hypernews Settings, set the same link category name. Then reload page with "fetch" and you are ready to go!
+1. Download the plugin as usual from the official WordPress repository. Activate the Hypernews plugin!
+2. Now create at least one link in the wp-admin WordPress Links and set a category to it. You can add several.
+3. In the settings dialog, set the same category name and save! Activate at least one "Publish to", post type.
+4. Reload the page at Hypernews start with the checkbox "fetch" checked.
+5. If you would like to save one RSS-item into a post type then click the link in the Published column at the row.
+6. Your new news item will be saved in draft mode only.
+7. Click the icon to get to the edit page or post.
 
 == Changelog ==
 
