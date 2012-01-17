@@ -1,16 +1,13 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 if(!class_exists('WP_List_Table'))
 {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
+/**
+ * 
+ */
 class Hypernews_List extends WP_List_Table 
 {
 

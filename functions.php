@@ -17,7 +17,7 @@ function hypernews_getunread_news(){
         get_currentuserinfo();    
 
         $fetch = new Hypernews_Fetcher();
-        $fetch->fetch();
+        $fetch->fetch(false);
 
         $cache = 0;
         $channel = get_user_meta($current_user->ID, "hypernews_channel");
