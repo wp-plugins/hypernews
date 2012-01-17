@@ -3,7 +3,7 @@ Contributors: EkAndreas
 Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 0.3
+Stable tag: 0.3.2
 
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
@@ -74,3 +74,9 @@ Please contact us at Twitter account @EkAndreas with questions and request of fe
 * Searchwords added to every link to enable filter
 * Fetching more smart and cache the result
 * Shows a red bullet to the Hypernews entry for easier notice
+
+= 0.3.1 =
+* Minor database-sql correction
+
+= 0.3.2 =
+* Just text-changes in readme and plugin-main, no functional changes.
