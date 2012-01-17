@@ -1,0 +1,142 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Andreas Ek <andreas@hypernode.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: hypernews_fetcher.php:70
+#@ hypernews
+msgid "Loaded"
+msgstr "Loaded"
+
+#: hypernews_list.php:42
+#@ hypernews
+msgid "Reload page"
+msgstr "Reload page"
+
+#: hypernews_list.php:44
+#@ hypernews
+msgid "Show hidden"
+msgstr "Show hidden"
+
+#: hypernews_list.php:46
+#@ hypernews
+msgid "Fetch new items from RSS Stream"
+msgstr "Fetch new items from RSS Stream"
+
+#: hypernews_list.php:66
+#@ hypernews
+msgid "Headline"
+msgstr "Headline"
+
+#: hypernews_list.php:67
+#@ hypernews
+msgid "Published"
+msgstr "Published"
+
+#: hypernews_list.php:68
+#@ hypernews
+msgid "Source"
+msgstr "Source"
+
+#: hypernews_list.php:69
+#@ hypernews
+msgid "Note"
+msgstr "Note"
+
+#: hypernews_list.php:163
+#@ hypernews
+msgid "Add as draft to"
+msgstr "Add as draft to"
+
+#: hypernews_list.php:203
+#@ hypernews
+msgid "Show"
+msgstr "Show"
+
+#: hypernews_list.php:204
+#@ hypernews
+msgid "Unread"
+msgstr "Unread"
+
+#: hypernews_list.php:205
+#@ hypernews
+msgid "Favorite"
+msgstr "Favorite"
+
+#: hypernews_list.php:206
+#@ hypernews
+msgid "Hide"
+msgstr "Hide"
+
+#: hypernews_list.php:260
+#@ hypernews
+msgid "Update"
+msgstr "Update"
+
+#: hypernews.php:30
+#: hypernews_settings.php:54
+#@ hypernews
+msgid "Settings"
+msgstr "Settings"
+
+#: hypernews_settings.php:60
+#@ hypernews
+msgid "Link category name:"
+msgstr "Link category name:"
+
+#: hypernews_settings.php:61
+#@ hypernews
+msgid "Match this with \"Link Category\" !"
+msgstr "Match this with \"Link Category\" !"
+
+#: hypernews_settings.php:65
+#@ default
+msgid "Interval:"
+msgstr "Interval:"
+
+#: hypernews_settings.php:66
+#@ hypernews
+msgid "seconds"
+msgstr "seconds"
+
+#: hypernews_settings.php:70
+#@ hypernews
+msgid "Show max chars:"
+msgstr "Show max chars:"
+
+#: hypernews_settings.php:80
+#@ hypernews
+msgid "Publish to:"
+msgstr "Publish to:"
+
+#: hypernews_settings.php:101
+#@ hypernews
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: hypernews_settings.php:75
+#@ hypernews
+msgid "Delete RSS-items older than:"
+msgstr "Delete RSS-items older than:"
+
+#: hypernews_settings.php:76
+#@ hypernews
+msgid "hours"
+msgstr "hours"
+
