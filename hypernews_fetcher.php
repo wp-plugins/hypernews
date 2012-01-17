@@ -62,12 +62,15 @@ class Hypernews_Fetcher
                     
                     foreach ($search_words as $key => $value) {
 
-                        if (strpos($item->get_title(),$value)){
+                        $title = strtolower($item->get_title());
+                        $body = strtolower($item->get_description());
+                        
+                        if (strpos($title,strtolower($value))){
                             $found_search = true;
                             break;
                         }
 
-                        if (strpos($item->get_description(),$value)){
+                        if (strpos($body,strtolower($value))){
                             $found_search = true;
                             break;
                         }
