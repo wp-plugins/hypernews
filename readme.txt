@@ -3,7 +3,7 @@ Contributors: EkAndreas
 Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 0.3.4
+Stable tag: 0.3.5
 
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
@@ -86,3 +86,6 @@ Please contact us at Twitter account @EkAndreas with questions and request of fe
 
 = 0.3.4 =
 * Search words is now case insensitive
+
+= 0.3.5 =
+* Compare search word in UTF-8 for swedish chars

@@ -7,7 +7,7 @@ class Hypernews_Fetcher
         global $wpdb;
         return $wpdb->prefix . "hypernews_store";
     }
-    
+
     function fetch($print_result)
     {
         global $wpdb;
@@ -60,23 +60,22 @@ class Hypernews_Fetcher
                         }
                     }
                     
-                    foreach ($search_words as $key => $value) {
-
-                        $title = strtolower($item->get_title());
-                        $body = strtolower($item->get_description());
+                    $title = utf8_encode(strtolower($item->get_title()));
+                    $body = utf8_encode(strtolower($item->get_description()));
                         
-                        if (strpos($title,strtolower($value))){
+                    foreach ($search_words as $key => $value) {
+			$value = utf8_encode(strtolower($value));
+                        if (strpos($title,$value)){
                             $found_search = true;
                             break;
                         }
 
-                        if (strpos($body,strtolower($value))){
+                        if (strpos($body,$value)){
                             $found_search = true;
                             break;
                         }
-
                     }
-                    
+
                     //Check if to old!
                     $date = date('Y-m-d H:i:s', strtotime($today . " -".hypernews_maxage()." hours"));
                     if ($item->get_date('Y-m-d H:i:s') < $date){
