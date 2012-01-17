@@ -125,7 +125,7 @@ function prepare_items() {
         $table_name2 = $wpdb->prefix . "hypernews_links";
         
 	/* -- Preparing your query -- */
-        $query = "SELECT s.*, l.source FROM ".$table_name." s INNER JOIN ".$table_name2." l ON S.link_id=l.id";
+        $query = "SELECT s.*, l.source FROM ".$table_name." s INNER JOIN ".$table_name2." l ON s.link_id=l.id";
         
         if (isset($_GET['channel'])){
             update_user_meta( $current_user->ID, "hypernews_channel", $_GET['channel']);
