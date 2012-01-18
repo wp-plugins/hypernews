@@ -52,7 +52,7 @@ class Hypernews_Fetcher
                     else
                     {
                         if (strlen($search)>0){
-                            $search_words[] = $search;
+                            $search_words[] = trim($search);
                         }
                         else
                         {
@@ -64,7 +64,7 @@ class Hypernews_Fetcher
                     $body = utf8_encode(strtolower($item->get_description()));
                         
                     foreach ($search_words as $key => $value) {
-			$value = utf8_encode(strtolower($value));
+			$value = trim(utf8_encode(strtolower($value)));
                         if (strpos($title,$value)){
                             $found_search = true;
                             break;

@@ -3,7 +3,7 @@
 Plugin Name: Hypernews
 Plugin URI: http://wordpress.org/extend/plugins/hypernews
 Description: Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
-Version: 0.3.5
+Version: 0.3.6
 Author: Hypernode AB
 Author URI: http://www.hypernode.se
 License: MIT
