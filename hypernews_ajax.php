@@ -95,9 +95,16 @@ function hypernews_publish()
     
     //Mark text with overflow!
     $text = strip_tags($row->description);
-    if (strlen($text) >  hypernews_maxchars())
+    
+    $remove_chars = hypernews_removechars();
+    if ($remove_chars>0 && strlen($text) > $remove_chars){
+        $text = substr($text, 0, $remove_chars);
+    }
+    
+    $max_chars = hypernews_maxchars();
+    if ($max_chars>0 && strlen($text) > $max_chars)
     {
-        $text = substr($text, 0, hypernews_maxchars()) . '<span style="BACKGROUND-COLOR: yellow">' . substr($text, hypernews_maxchars()) . '</span>';
+        $text = substr($text, 0, $max_chars) . '<del>' . substr($text, $max_chars) . '</del>';
     }
     
     //Create new post
@@ -112,9 +119,22 @@ function hypernews_publish()
     );
     $post_id = wp_insert_post($new_post);
     
-    add_post_meta($post_id, 'source_link', $row->link, true);
-    add_post_meta($post_id, 'source_name', $row->source, true);
-    add_post_meta($post_id, 'hypernews_id', $row->id, true);
+    $meta = array();
+    $meta['url'] = $row->url;
+    $meta['title'] = $row->title;
+    $meta['date'] = $row->pubdate;
+    $meta['author'] = $user_ID;
+
+    //SLÅ UPP link_id och hämta namnet på källan!
+    if ($row->link_id){
+        $table_name_links = $wpdb->prefix . "hypernews_links";
+        $link = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".$table_name_links." WHERE id = '".$row->link_id."';" ) );
+        $meta['link_id'] = $link->id;
+        $meta['source'] = $link->source;
+        $meta['feed'] = $link->url;
+        $meta['channel'] = $link->source;
+        add_post_meta($post_id, 'hypernews_metabox', $meta, true);
+    }
     
     $url = esc_url(get_permalink( $post_id ));
 
@@ -130,9 +150,9 @@ function hypernews_publish()
         'POST', 
         $id 
     );
+
+    $result = $wpdb->query($sql);
     
-    $result = $wpdb->query( $wpdb->prepare( $sql ) );
-        
     if (!$result)
     {
         die('0');

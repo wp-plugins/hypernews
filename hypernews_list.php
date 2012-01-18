@@ -260,7 +260,7 @@ function display_rows() {
                                     /*$3%s*/ $this->row_actions($actions),
                                         $rec->id,
                                         strip_tags($rec->description),
-                                        $rec->link
+                                        $rec->url
                                 );
 
                                 //echo '<td '.$attributes.'><strong><a href="'.$editlink.'" title="Edit">'.stripslashes($rec->title).'</a></strong></td>'; 

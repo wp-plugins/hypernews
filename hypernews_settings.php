@@ -14,6 +14,19 @@ function hypernews_maxchars()
     }
 }
 
+function hypernews_removechars()
+{
+    $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
+    if (is_numeric($hypernews_settings['removechars']))
+    {
+        return $hypernews_settings['removechars'];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 function hypernews_maxage()
 {
    
@@ -33,16 +46,14 @@ function hypernews_settings() {
     global $wpdb;
     global $current_user; get_currentuserinfo(); // get current user info
     
-    $hypernews_settings = array('category' => 'Hypernews',
-        'interval' => '30', 'maxchars' => '255', 'maxage' => '168' );
+    $hypernews_settings = array('maxchars' => '255', 'removechars' => '0', 'maxage' => '168' );
 
     $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
     
     if ( isset( $_REQUEST['hypernews-update'] ) )
     {
-        $hypernews_settings['category'] = $_REQUEST['hypernews-category'];
-        $hypernews_settings['interval'] = $_REQUEST['hypernews-interval'];
         $hypernews_settings['maxchars'] = $_REQUEST['hypernews-maxchars'];        
+        $hypernews_settings['removechars'] = $_REQUEST['hypernews-removechars'];        
         $hypernews_settings['maxage'] = $_REQUEST['hypernews-maxage'];        
         $hypernews_settings['posttypes'] = $_REQUEST['hypernews-posttypes'];
         update_option('hypernews-settings', $hypernews_settings);
@@ -52,7 +63,7 @@ function hypernews_settings() {
             $sql = "DELETE FROM ".$table_name;
             $wpdb->query( $sql );
             set_transient( 'hypernews_cache_unread', NULL);
-            echo "<script>document.location='?page=hypernews';</script>";
+            echo "<script>document.location='?page=hypernews&fetch=true';</script>";
         }
         
     }
@@ -66,19 +77,21 @@ function hypernews_settings() {
             
             <table class="form-table">
 
-                <!--tr valign="top">
-                    <th scope="row"><?php _e('Interval:'); ?></th>
-                    <td><input type="text" name="hypernews-interval" value="<?php echo $hypernews_settings['interval']; ?>" /> <?php _e('seconds', 'hypernews'); ?></td>
-                </tr-->
-                
                 <tr valign="top">
-                    <th scope="row"><?php _e('Show max chars:', 'hypernews'); ?></th>
-                    <td><input type="text" name="hypernews-maxchars" value="<?php echo $hypernews_settings['maxchars']; ?>" /></td>
+                    <th scope="row"><?php _e('Strikethrough text after n-characters:', 'hypernews'); ?></th>
+                    <td><input size="5" type="text" name="hypernews-maxchars" value="<?php echo hypernews_maxchars() ?>" />&nbsp;
+                    <?php _e('( 0 = disabled )', 'hypernews'); ?></td>
+                </tr>
+
+                <tr valign="top">
+                    <th scope="row"><?php _e('Remove text after n-characters:', 'hypernews'); ?></th>
+                    <td><input size="5" type="text" name="hypernews-removechars" value="<?php echo hypernews_removechars() ?>" />&nbsp;
+                    <?php _e('( 0 = disabled )', 'hypernews'); ?></td>
                 </tr>
 
                 <tr valign="top">
                     <th scope="row"><?php _e('Delete RSS-items older than:', 'hypernews'); ?></th>
-                    <td><input type="text" name="hypernews-maxage" value="<?php echo $hypernews_settings['maxage']; ?>" /> <?php _e('hours', 'hypernews'); ?></td>
+                    <td><input size="5" type="text" name="hypernews-maxage" value="<?php echo hypernews_maxage() ?>" /> <?php _e('hours', 'hypernews'); ?></td>
                 </tr>
 
                 <tr valign="top">

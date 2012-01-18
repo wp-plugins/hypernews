@@ -3,7 +3,7 @@ Contributors: EkAndreas
 Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 0.3.6
+Stable tag: 0.3.7
 
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
@@ -41,6 +41,8 @@ Now reload the entry page and start working with your RSS-streams as news to you
 
 Please contact us at Twitter account @EkAndreas with questions and request of features!
 
+To use the data in the post metabox for developers: Post meta name is 'hypernews_metabox' with an array of data.
+
 == Screenshots ==
 
 1. Download the plugin as usual from the official WordPress repository. Activate the Hypernews plugin!
@@ -51,21 +53,30 @@ Please contact us at Twitter account @EkAndreas with questions and request of fe
 
 == Changelog ==
 
-= 0.2.1 =
-* First beta version
+= 0.3.7 =
+* Title-url missing, now working!
+* Metabox per post type with meta data, source and link.
+* Javascript removed
+* Remove after... -setting added to remove text after n chars
+* Strikethrough instead of yellow marker
 
-= 0.2.2 =
-* Getting the localization files to work
+= 0.3.6 =
+* Trim on searchwords to void user errors
 
-= 0.2.3 =
-* Fixed issue when using network wordpress site, settings.php renamed hypernews_settings.php
+= 0.3.5 =
+* Compare search word in UTF-8 for swedish chars
 
-= 0.2.4 =
-* Max age added to settings, deletes rss-items older than nnn hours.
-* Reload issue fixed.
+= 0.3.4 =
+* Search words is now case insensitive
 
-= 0.2.5 =
-* Fix to language files
+= 0.3.3 =
+* SQL-statement corrected
+
+= 0.3.2 =
+* Just text-changes in readme and plugin-main, no functional changes.
+
+= 0.3.1 =
+* Minor database-sql correction
 
 = 0.3 =
 --NOTE THAT YOUR HYPERNEWS DATA WILL BE REPLACED!--
@@ -75,20 +86,18 @@ Please contact us at Twitter account @EkAndreas with questions and request of fe
 * Fetching more smart and cache the result
 * Shows a red bullet to the Hypernews entry for easier notice
 
-= 0.3.1 =
-* Minor database-sql correction
+= 0.2.5 =
+* Fix to language files
 
-= 0.3.2 =
-* Just text-changes in readme and plugin-main, no functional changes.
+= 0.2.4 =
+* Max age added to settings, deletes rss-items older than nnn hours.
+* Reload issue fixed.
 
-= 0.3.3 =
-* SQL-statement corrected
+= 0.2.3 =
+* Fixed issue when using network wordpress site, settings.php renamed hypernews_settings.php
 
-= 0.3.4 =
-* Search words is now case insensitive
+= 0.2.2 =
+* Getting the localization files to work
 
-= 0.3.5 =
-* Compare search word in UTF-8 for swedish chars
-
-= 0.3.6 =
-* Trim on searchwords to void user errors
+= 0.2.1 =
+* First beta version
