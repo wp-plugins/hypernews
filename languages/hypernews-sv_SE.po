@@ -24,170 +24,138 @@ msgstr ""
 msgid "Show hidden"
 msgstr "Visa dolda"
 
-#: hypernews_list.php:138
+#: hypernews_list.php:135
 #@ hypernews
 msgid "Headline"
 msgstr "Rubrik"
 
-#: hypernews_list.php:139
+#: hypernews_list.php:136
 #@ hypernews
 msgid "Published"
 msgstr "Publicerad"
 
-#: hypernews_links.php:241
-#: hypernews_list.php:140
+#: hypernews_browse.php:177
+#: hypernews_links.php:199
+#: hypernews_list.php:138
 #@ hypernews
 msgid "Source"
 msgstr "Källa"
 
-#: hypernews_list.php:141
+#: hypernews_list.php:139
 #@ hypernews
 msgid "Note"
 msgstr "Notering"
 
-#: hypernews_list.php:262
+#: hypernews_list.php:327
 #@ hypernews
 msgid "Add as draft to"
 msgstr "Lägg till som utkast till"
 
-#: hypernews_list.php:313
+#: hypernews_list.php:289
 #@ hypernews
 msgid "Show"
 msgstr "Visa"
 
-#: hypernews_list.php:314
+#: hypernews_list.php:290
 #@ hypernews
 msgid "Unread"
 msgstr "Oläst"
 
-#: hypernews_list.php:315
+#: hypernews_list.php:291
 #@ hypernews
 msgid "Favorite"
 msgstr "Favorit"
 
-#: hypernews_list.php:316
+#: hypernews_list.php:292
 #@ hypernews
 msgid "Hide"
 msgstr "Dölj"
 
-#: hypernews_list.php:376
+#: hypernews_list.php:369
 #@ hypernews
 msgid "Update"
 msgstr "Uppdatera"
 
-#: hypernews.php:44
-#: hypernews_settings.php:74
+#: hypernews_settings.php:86
 #@ hypernews
 msgid "Settings"
 msgstr "Inställningar"
 
-#: hypernews_settings.php:98
+#: hypernews_links.php:81
 #@ hypernews
 msgid "Publish to:"
 msgstr "Publicera till:"
 
-#: hypernews_settings.php:125
-#@ hypernews
-msgid "Save Changes"
-msgstr "Spara ändringar"
-
-#: hypernews_settings.php:93
+#: hypernews_links.php:77
 #@ hypernews
 msgid "Delete RSS-items older than:"
 msgstr "Ta bort nyheter äldre än:"
 
-#: hypernews_settings.php:94
-#@ hypernews
-msgid "hours"
-msgstr "timmar"
-
-#: hypernews.php:42
-#: hypernews_links.php:96
-#@ hypernews
-msgid "Links"
-msgstr "Länkar"
-
-#: hypernews_browse.php:7
-#@ hypernews
-msgid "Browse"
-msgstr "Surfa"
-
-#: hypernews_links.php:101
+#: hypernews_links.php:49
 #@ hypernews
 msgid "Edit RSS source"
 msgstr "Ändra RSS-källa"
 
-#: hypernews_links.php:104
+#: hypernews_links.php:52
 #@ hypernews
 msgid "Source name"
 msgstr "Källa"
 
-#: hypernews_links.php:108
+#: hypernews_browse.php:49
+#: hypernews_links.php:56
 #@ hypernews
 msgid "Channel name"
 msgstr "Kanal"
 
-#: hypernews_links.php:112
+#: hypernews_browse.php:53
+#: hypernews_links.php:60
 #@ hypernews
 msgid "Url"
 msgstr "Webbadress"
 
-#: hypernews_links.php:116
+#: hypernews_links.php:64
 #@ hypernews
 msgid "Search"
 msgstr "Sök"
 
-#: hypernews_links.php:118
+#: hypernews_links.php:66
 #@ hypernews
 msgid "Only collecting news with one of these comma separated words found"
 msgstr "Hämtar bara nyheter med träff på ett av orden (kommaseparerat)"
 
-#: hypernews_links.php:121
-#@ hypernews
-msgid "Sort order"
-msgstr "Sorteringsordning"
-
-#: hypernews_links.php:131
+#: hypernews_browse.php:63
+#: hypernews_links.php:115
 #@ hypernews
 msgid "Save"
 msgstr "Spara"
 
-#: hypernews_links.php:263
-#@ hypernews
-msgid "Add new RSS-url"
-msgstr "Lägg till ny RSS-adress"
-
-#: hypernews_settings.php:118
-#@ hypernews
-msgid "Clear all items from store:"
-msgstr "Rensa alla nyheter från databasen:"
-
-#: hypernews_settings.php:119
-#@ hypernews
-msgid "Hypernews will fetch new items directly."
-msgstr "Hypernews kommer att hämta nyheter direkt efteråt."
-
-#: hypernews_links.php:242
+#: hypernews_browse.php:178
+#: hypernews_links.php:200
+#: hypernews_list.php:137
 #@ hypernews
 msgid "Channel"
 msgstr "Kanal"
 
-#: hypernews_links.php:243
+#: hypernews_browse.php:179
+#: hypernews_links.php:201
 #@ hypernews
 msgid "RSS-Url"
 msgstr "RSS-källa"
 
-#: hypernews_links.php:273
+#: hypernews_browse.php:206
+#: hypernews_links.php:245
 #@ hypernews
 msgid "Edit"
 msgstr "Ändra"
 
-#: hypernews_links.php:274
+#: hypernews_browse.php:207
+#: hypernews_links.php:246
 #@ hypernews
 msgid "Confirm delete this source!"
 msgstr "Källan kommer att tas bort!"
 
-#: hypernews_links.php:274
+#: hypernews_browse.php:207
+#: hypernews_links.php:246
 #@ hypernews
 msgid "Delete"
 msgstr "Ta bort"
@@ -202,26 +170,15 @@ msgstr "Importerad från RSS-feed:"
 msgid "Original newslink:"
 msgstr "Länk till nyhet:"
 
-#: hypernews_settings.php:81
+#: hypernews_links.php:69
 #@ hypernews
 msgid "Strikethrough text after n-characters:"
 msgstr "Genomstruken efter n-tecken:"
 
-#: hypernews_settings.php:83
-#: hypernews_settings.php:89
-#@ hypernews
-msgid "( 0 = disabled )"
-msgstr "( 0 = avstängd funktion )"
-
-#: hypernews_settings.php:87
+#: hypernews_links.php:73
 #@ hypernews
 msgid "Remove text after n-characters:"
 msgstr "Ta bort text efter n-tecken:"
-
-#: hypernews_links.php:125
-#@ hypernews
-msgid "Test this feed after save"
-msgstr "Testa denna RSS efter \"spara\""
 
 #: hypernews_list.php:26
 #@ hypernews
@@ -257,4 +214,75 @@ msgstr "Visa allt innehåll"
 #@ hypernews
 msgid "Only show content in channel: "
 msgstr "Visar bara innehåll från kanal:"
+
+#: hypernews_links.php:70
+#: hypernews_links.php:74
+#: hypernews_links.php:78
+#@ hypernews
+msgid "( 0 = feature disabled )"
+msgstr "( 0 = avstäng funktion )"
+
+#: hypernews_browse.php:57
+#: hypernews_links.php:101
+#@ hypernews
+msgid "Sort order:"
+msgstr "Sorteringsordning:"
+
+#: hypernews_links.php:105
+#@ hypernews
+msgid "Test this feed after save:"
+msgstr "Testa denna RSS efter spara:"
+
+#: hypernews_links.php:109
+#@ hypernews
+msgid "Reset all items from this source:"
+msgstr "Nollställ alla nyheter från denna källa:"
+
+#: hypernews_browse.php:64
+#: hypernews_links.php:116
+#@ hypernews
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: hypernews_links.php:202
+#@ hypernews
+msgid "Post types"
+msgstr "Posttyper"
+
+#: hypernews.php:42
+#: hypernews_links.php:44
+#@ hypernews
+msgid "RSS Feeds"
+msgstr "RSS-källor"
+
+#: hypernews_browse.php:42
+#@ hypernews
+msgid "Edit browser source"
+msgstr "Ändra länk"
+
+#: hypernews_browse.php:45
+#@ hypernews
+msgid "Browser name"
+msgstr "Namn"
+
+#: hypernews_browse.php:124
+#@ hypernews
+msgid "Add new browser-url"
+msgstr "Lägg till länk"
+
+#: hypernews_browse.php:127
+#@ hypernews
+msgid "Start browsing: "
+msgstr "Starta surflista:"
+
+#: hypernews_links.php:219
+#@ hypernews
+msgid "Add new RSS Feed"
+msgstr "Lägg till ny RSS-källa"
+
+#: hypernews.php:43
+#: hypernews_browse.php:37
+#@ hypernews
+msgid "Browse List"
+msgstr "Surflistan"
 

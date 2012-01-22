@@ -15,23 +15,25 @@ class Hypernews_Fetcher
         
         $channel = get_user_meta($current_user->ID, "hypernews_channel");
         if (sizeof($channel)>0) $channel = $channel[0];
-            
-        $table_name = $wpdb->prefix . "hypernews_links";
-        $sql = 'SELECT * FROM '.$table_name.' WHERE type=\'RSS\''; 
-        
+
+        $settings = new Hypernews_Settings();
+        $links = $settings->links();
+
+        //Remove if channel choosen
         if (strlen($channel)>0){
-            $sql.=" AND channel='".$channel."'";
+            foreach ($links as $key => $value) {
+                if ($value['channel']!=$channel){
+                    unset($links[$key]);
+                }
+            }
         }
-
-        $sql.= ' ORDER BY sort_order';
-        $bookmarks = $wpdb->get_results($sql); 
-
+        
         $reload = false;
         
         // Loop through each bookmark and print formatted output
-        foreach ( $bookmarks as $bm ) 
+        foreach ( $links as $bm ) 
         { 
-            $items = $this->get_items($bm->url, $bm->search);
+            $items = $this->get_items($bm);
 
             foreach ($items['match'] as $key => $item) {
                 $sql = 'SELECT * FROM '.$this->tablename().' WHERE guid="'.$item->get_id().'"';
@@ -43,14 +45,16 @@ class Hypernews_Fetcher
                         array( 
                             'title' => $item->get_title(), 
                             'url' => $item->get_link(),
-                            'link_id' => $bm->id,
-                            'channel' => $bm->channel,
+                            'link_id' => $bm['id'],
+                            'channel' => $bm['channel'],
+                            'source' => $bm['source'],
                             'description' => $item->get_description(),
                             'pubdate' => $item->get_date('Y-m-d H:i:s'),
                             'guid' => $item->get_id(),
                             'status' => 'NEW'
                         ), 
                         array( 
+                            '%s', 
                             '%s', 
                             '%s', 
                             '%s', 
@@ -77,11 +81,16 @@ class Hypernews_Fetcher
         
     }
     
-    public function get_items($url, $arg_searchwords=""){
+    public function get_items($link){
 
-        $result = array();
+        //initial
+        $result = array(
+            'match'=>array(),
+            'mismatch'=>array(),
+            'original'=>array()
+        );
         
-        $rss = fetch_feed($url);
+        $rss = fetch_feed($link['url']);
         if (!is_wp_error( $rss ) )
         {
             $maxitems = $rss->get_item_quantity(999); 
@@ -124,9 +133,11 @@ class Hypernews_Fetcher
                 }
 
                 //Check if to old!
-                $date = date('Y-m-d H:i:s', strtotime($today . " -".hypernews_maxage()." hours"));
-                if ($item->get_date('Y-m-d H:i:s') < $date){
-                    $found_search = false;
+                if ($link['maxage']>0){
+                    $date = date('Y-m-d H:i:s', strtotime($today . " -".$link['maxage']." hours"));
+                    if ($item->get_date('Y-m-d H:i:s') < $date){
+                        $found_search = false;
+                    }
                 }
 
                 if ($found_search) {

@@ -19,124 +19,270 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: hypernews_fetcher.php:70
-#@ hypernews
-msgid "Loaded"
-msgstr "Loaded"
-
-#: hypernews_list.php:42
-#@ hypernews
-msgid "Reload page"
-msgstr "Reload page"
-
-#: hypernews_list.php:44
+#: hypernews_list.php:57
 #@ hypernews
 msgid "Show hidden"
 msgstr "Show hidden"
 
-#: hypernews_list.php:46
-#@ hypernews
-msgid "Fetch new items from RSS Stream"
-msgstr "Fetch new items from RSS Stream"
-
-#: hypernews_list.php:66
+#: hypernews_list.php:135
 #@ hypernews
 msgid "Headline"
 msgstr "Headline"
 
-#: hypernews_list.php:67
+#: hypernews_list.php:136
 #@ hypernews
 msgid "Published"
 msgstr "Published"
 
-#: hypernews_list.php:68
+#: hypernews_browse.php:177
+#: hypernews_links.php:199
+#: hypernews_list.php:138
 #@ hypernews
 msgid "Source"
 msgstr "Source"
 
-#: hypernews_list.php:69
+#: hypernews_list.php:139
 #@ hypernews
 msgid "Note"
 msgstr "Note"
 
-#: hypernews_list.php:163
+#: hypernews_list.php:327
 #@ hypernews
 msgid "Add as draft to"
 msgstr "Add as draft to"
 
-#: hypernews_list.php:203
+#: hypernews_list.php:289
 #@ hypernews
 msgid "Show"
 msgstr "Show"
 
-#: hypernews_list.php:204
+#: hypernews_list.php:290
 #@ hypernews
 msgid "Unread"
 msgstr "Unread"
 
-#: hypernews_list.php:205
+#: hypernews_list.php:291
 #@ hypernews
 msgid "Favorite"
 msgstr "Favorite"
 
-#: hypernews_list.php:206
+#: hypernews_list.php:292
 #@ hypernews
 msgid "Hide"
 msgstr "Hide"
 
-#: hypernews_list.php:260
+#: hypernews_list.php:369
 #@ hypernews
 msgid "Update"
 msgstr "Update"
 
-#: hypernews.php:30
-#: hypernews_settings.php:54
+#: hypernews_settings.php:86
 #@ hypernews
 msgid "Settings"
 msgstr "Settings"
 
-#: hypernews_settings.php:60
-#@ hypernews
-msgid "Link category name:"
-msgstr "Link category name:"
-
-#: hypernews_settings.php:61
-#@ hypernews
-msgid "Match this with \"Link Category\" !"
-msgstr "Match this with \"Link Category\" !"
-
-#: hypernews_settings.php:65
-#@ default
-msgid "Interval:"
-msgstr "Interval:"
-
-#: hypernews_settings.php:66
-#@ hypernews
-msgid "seconds"
-msgstr "seconds"
-
-#: hypernews_settings.php:70
-#@ hypernews
-msgid "Show max chars:"
-msgstr "Show max chars:"
-
-#: hypernews_settings.php:80
+#: hypernews_links.php:81
 #@ hypernews
 msgid "Publish to:"
 msgstr "Publish to:"
 
-#: hypernews_settings.php:101
-#@ hypernews
-msgid "Save Changes"
-msgstr "Save Changes"
-
-#: hypernews_settings.php:75
+#: hypernews_links.php:77
 #@ hypernews
 msgid "Delete RSS-items older than:"
 msgstr "Delete RSS-items older than:"
 
-#: hypernews_settings.php:76
+#: hypernews.php:43
+#: hypernews_browse.php:37
 #@ hypernews
-msgid "hours"
-msgstr "hours"
+msgid "Browse"
+msgstr ""
+
+#: hypernews_links.php:49
+#@ hypernews
+msgid "Edit RSS source"
+msgstr ""
+
+#: hypernews_links.php:52
+#@ hypernews
+msgid "Source name"
+msgstr ""
+
+#: hypernews_browse.php:49
+#: hypernews_links.php:56
+#@ hypernews
+msgid "Channel name"
+msgstr ""
+
+#: hypernews_browse.php:53
+#: hypernews_links.php:60
+#@ hypernews
+msgid "Url"
+msgstr ""
+
+#: hypernews_links.php:64
+#@ hypernews
+msgid "Search"
+msgstr ""
+
+#: hypernews_links.php:66
+#@ hypernews
+msgid "Only collecting news with one of these comma separated words found"
+msgstr ""
+
+#: hypernews_links.php:69
+#@ hypernews
+msgid "Strikethrough text after n-characters:"
+msgstr ""
+
+#: hypernews_links.php:70
+#: hypernews_links.php:74
+#: hypernews_links.php:78
+#@ hypernews
+msgid "( 0 = feature disabled )"
+msgstr ""
+
+#: hypernews_links.php:73
+#@ hypernews
+msgid "Remove text after n-characters:"
+msgstr ""
+
+#: hypernews_browse.php:57
+#: hypernews_links.php:101
+#@ hypernews
+msgid "Sort order:"
+msgstr ""
+
+#: hypernews_links.php:105
+#@ hypernews
+msgid "Test this feed after save:"
+msgstr ""
+
+#: hypernews_links.php:109
+#@ hypernews
+msgid "Reset all items from this source:"
+msgstr ""
+
+#: hypernews_browse.php:63
+#: hypernews_links.php:115
+#@ hypernews
+msgid "Save"
+msgstr ""
+
+#: hypernews_browse.php:64
+#: hypernews_links.php:116
+#@ hypernews
+msgid "Cancel"
+msgstr ""
+
+#: hypernews_browse.php:178
+#: hypernews_links.php:200
+#: hypernews_list.php:137
+#@ hypernews
+msgid "Channel"
+msgstr ""
+
+#: hypernews_browse.php:179
+#: hypernews_links.php:201
+#@ hypernews
+msgid "RSS-Url"
+msgstr ""
+
+#: hypernews_links.php:202
+#@ hypernews
+msgid "Post types"
+msgstr ""
+
+#: hypernews_browse.php:206
+#: hypernews_links.php:245
+#@ hypernews
+msgid "Edit"
+msgstr ""
+
+#: hypernews_browse.php:207
+#: hypernews_links.php:246
+#@ hypernews
+msgid "Confirm delete this source!"
+msgstr ""
+
+#: hypernews_browse.php:207
+#: hypernews_links.php:246
+#@ hypernews
+msgid "Delete"
+msgstr ""
+
+#: hypernews_list.php:26
+#@ hypernews
+msgid "Fetching items from RSS-feeds..."
+msgstr ""
+
+#: hypernews_list.php:27
+#@ hypernews
+msgid "...please wait while loading news and reloading page!"
+msgstr ""
+
+#: hypernews_list.php:39
+#@ hypernews
+msgid "Filter news on channel:"
+msgstr ""
+
+#: hypernews_list.php:55
+#@ hypernews
+msgid "Fetch latest news"
+msgstr ""
+
+#: hypernews_list.php:56
+#@ hypernews
+msgid "Hide selected news"
+msgstr ""
+
+#: hypernews_list.php:58
+#@ hypernews
+msgid "Show content in all channels"
+msgstr ""
+
+#: hypernews_list.php:62
+#@ hypernews
+msgid "Only show content in channel: "
+msgstr ""
+
+#: hypernews_metabox.php:43
+#@ hypernews
+msgid "Imported from RSS-feed:"
+msgstr ""
+
+#: hypernews_metabox.php:45
+#@ hypernews
+msgid "Original newslink:"
+msgstr ""
+
+#: hypernews.php:42
+#: hypernews_links.php:44
+#@ hypernews
+msgid "RSS Feeds"
+msgstr ""
+
+#: hypernews_browse.php:42
+#@ hypernews
+msgid "Edit browser source"
+msgstr ""
+
+#: hypernews_browse.php:45
+#@ hypernews
+msgid "Browser name"
+msgstr ""
+
+#: hypernews_browse.php:124
+#@ hypernews
+msgid "Add new browser-url"
+msgstr ""
+
+#: hypernews_browse.php:127
+#@ hypernews
+msgid "Start browsing: "
+msgstr ""
+
+#: hypernews_links.php:219
+#@ hypernews
+msgid "Add new RSS Feed"
+msgstr ""
 

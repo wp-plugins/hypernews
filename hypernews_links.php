@@ -5,138 +5,127 @@ function hypernews_links(){
     global $wpdb;
     global $current_user;
     get_currentuserinfo();
-
-    //process form post!
-    if (isset($_GET["delete"]) && isset($_GET["id"])){
-        $table_name = $wpdb->prefix . "hypernews_links";
-        $sql = 'DELETE FROM '.$table_name.' WHERE id='.$_GET['id'];
-        $wpdb->query($sql); 
-        echo '<script>document.location="?page=hypernews_links";</script>';
-    }
     
-    if (isset($_POST["save"]) && isset($_POST["id"])){
-        $table_name = $wpdb->prefix . "hypernews_links";
-        if ($_POST["id"]==0){
-            //INSERT
-            $wpdb->insert( 
-                    $table_name, 
-                    array( 
-                            'source' => esc_attr($_POST["source"]), 
-                            'channel' => esc_attr($_POST["channel"]), 
-                            'type' => 'RSS', 
-                            'url' => esc_attr($_POST["url"]), 
-                            'search' => esc_attr($_POST["search"]), 
-                            'sort_order' => esc_attr($_POST["sort_order"]) 
-                    ), 
-                    array( 
-                            '%s', 
-                            '%s', 
-                            '%s', 
-                            '%s', 
-                            '%s', 
-                            '%d' 
-                    ) 
-                );
-        }
-        else{ 
-            //UPDATE
-            $wpdb->update( 
-                    $table_name, 
-                    array( 
-                            'source' => esc_attr($_POST["source"]), 
-                            'channel' => esc_attr($_POST["channel"]), 
-                            'type' => 'RSS', 
-                            'url' => esc_attr($_POST["url"]), 
-                            'search' => esc_attr($_POST["search"]), 
-                            'sort_order' => esc_attr($_POST["sort_order"]) 
-                    ), 
-                    array( 'ID' => $_POST["id"] ), 
-                    array( 
-                            '%s', 
-                            '%s', 
-                            '%s', 
-                            '%s', 
-                            '%s', 
-                            '%d' 
-                    ), 
-                    array( '%d' ) 
-            );
-        }
+    $settings = new Hypernews_Settings();
+    $current_link = $settings->get_link();
+    
+//        echo '<script>document.location="?page=hypernews_links";</script>';
+
+    $link_id = 0;
+    if (isset($_GET['id'])){
         
-        if (!$_POST["try"]){
+        if (isset($_GET['delete'])){
+            $settings->delete_link($_GET['id']);
             echo '<script>document.location="?page=hypernews_links";</script>';
         }
-        
-    }
-
-    $source = "";
-    $channel = "";
-    $url = "";
-    $sort_order = 10;
-    if (isset($_GET["id"])){
-        $table_name = $wpdb->prefix . "hypernews_links";
-        $sql = 'SELECT * FROM '.$table_name.' WHERE id='.$_GET['id'];
-        $row = $wpdb->get_row($sql,ARRAY_A); 
-        $source = $row['source'];
-        $channel = $row['channel'];
-        
-        if (strlen($channel)==0){
-            $channel = get_user_meta($current_user->ID, "hypernews_channel");
-            if (sizeof($channel)>0) $channel = $channel[0];
+        else{
+            $current_link = $settings->get_link($_GET['id']);
+            $link_id = $current_link['id'];
         }
         
-        $url = $row['url'];
-        $search = $row['search'];
-        $sort_order = $row['sort_order'];
     }
     
+    if (isset($_POST['id'])){
+        //SPARA
+        $current_link['source'] = esc_attr($_POST['source']);
+        $current_link['channel'] = esc_attr($_POST['channel']);
+        $current_link['url'] = $_POST['url'];
+        $current_link['search'] = esc_attr($_POST['search']);
+        $current_link['maxchars'] = esc_attr($_POST['maxchars']);
+        $current_link['removechars'] = esc_attr($_POST['removechars']);
+        $current_link['maxage'] = esc_attr($_POST['maxage']);
+        $current_link['sort_order'] = esc_attr($_POST['sort_order']);
+        $current_link['posttypes'] = $_POST['posttypes'];
+        $settings->set_link($current_link);
+    }
     
 ?>
     <div class="wrap">
-        <div id="icon-options-general" class="icon32"><br/></div><h2><?php _e('Links', 'hypernews'); ?></h2>
+        <div id="icon-link-manager" class="icon32"><br/></div><h2><?php _e('RSS Feeds', 'hypernews'); ?></h2>
         <form method="post">
         <?php
-        if (isset($_GET["id"])) {
+        if (isset($_GET['id'])) {
             ?>
             <h3><?php _e('Edit RSS source','hypernews'); ?></h3>
-            <fieldset>
                 <p>
                     <?php _e('Source name','hypernews'); ?>:<br/>
-                    <input type="text" name="source" value="<?php echo $source; ?>" id="hypernews_name" size="50" />
+                    <input type="text" name="source" value="<?php echo $current_link['source']; ?>" id="hypernews_name" size="50" />
                 </p>
                 <p>
                     <?php _e('Channel name','hypernews'); ?>:<br/>
-                    <input type="text" name="channel" value="<?php echo $channel; ?>" size="50" />
+                    <input type="text" name="channel" value="<?php echo $current_link['channel']; ?>" size="50" />
                 </p>
                 <p>
                     <?php _e('Url','hypernews'); ?>:<br/>
-                    <input type="text" name="url" value="<?php echo $url; ?>" size="50" />
+                    <input type="text" name="url" value="<?php echo $current_link['url']; ?>" size="50" />
                 </p>
                 <p>
                     <?php _e('Search','hypernews'); ?>:<br/>
-                    <textarea name="search" cols="50" rows="5" scrollbars="1"><?php echo $search; ?></textarea><br/>
+                    <textarea name="search" cols="50" rows="5" scrollbars="1"><?php echo $current_link['search']; ?></textarea><br/>
                     <i><?php _e('Only collecting news with one of these comma separated words found','hypernews'); ?></i>
                 </p>
                 <p>
-                    <?php _e('Sort order','hypernews'); ?>:<br/>
-                    <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="5" />
+                    <?php _e('Strikethrough text after n-characters:', 'hypernews'); ?>
+                    <input type="text" name="maxchars" value="<?php echo $current_link['maxchars']; ?>" size="5" />&nbsp;<?php _e('( 0 = feature disabled )', 'hypernews'); ?>
                 </p>
                 <p>
-                    <?php _e('Test this feed after save','hypernews'); ?>:&nbsp;
-                    <input type="checkbox" name="try" />
+                    <?php _e('Remove text after n-characters:', 'hypernews'); ?>
+                    <input type="text" name="removechars" value="<?php echo $current_link['removechars']; ?>" size="5" />&nbsp;<?php _e('( 0 = feature disabled )', 'hypernews'); ?>
+                </p>
+                <p>
+                    <?php _e('Delete RSS-items older than:', 'hypernews'); ?>
+                    <input type="text" name="maxage" value="<?php echo $current_link['maxage']; ?>" size="5" />&nbsp;<?php _e('( 0 = feature disabled )', 'hypernews'); ?>
+                </p>
+                <p>
+                    <?php _e('Publish to:', 'hypernews'); ?>
+                    <?php
+                        $post_types=get_post_types(array('public'=>true),'objects'); 
+                        foreach ($post_types as $post_type ) 
+                        {
+                            echo '&nbsp;&nbsp;&nbsp;<span style="background-color:#CCC;padding:4px;"><input type="checkbox" name="posttypes[]" value="'.$post_type->name.'" ';
+
+                            $posttypes = $current_link['posttypes'];
+                            if (!is_array($posttypes)) $posttypes = array();
+                            
+                            if (in_array($post_type->name, $posttypes))
+                            {
+                                echo ' checked';
+                            }
+
+                            echo '> '. $post_type->label. '</span>';
+                        }
+                    ?>
+                </p>
+                <p>
+                    <?php _e('Sort order:','hypernews'); ?>
+                    <input type="text" name="sort_order" value="<?php echo $current_link['sort_order']; ?>" size="5" />
+                </p>
+                <p>
+                    <?php _e('Test this feed after save:','hypernews'); ?>&nbsp;
+                    <input type="checkbox" name="test" />
+                </p>
+                <p>
+                    <?php _e('Reset all items from this source:', 'hypernews'); ?>&nbsp;
+                    <input type="checkbox" name="clear" />
                 </p>
                 <p>
                     <input type="hidden" name="save" value="true" />
                     <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>" />
-                    <input type="submit" class="button-primary" value="<?php _e('Save','hypernews') ?>" />
+                    <input type="submit" name="save" class="button-primary" value="<?php _e('Save','hypernews') ?>" />
+                    <input type="button" class="button-secondary" value="<?php _e('Cancel','hypernews') ?>" onclick="document.location='?page=hypernews_links';" />
                 </p>
-            </fieldset>
         <?php
 
-            if ($_POST["try"]){
-                echo '<h3>Testing feed "'.$source.'":</h3>';
+            if ($_POST["clear"]){
+                echo '<h3>Clear...</h3>';
+                $sql = "DELETE FROM ".$wpdb->prefix . "hypernews_store WHERE link_id=".$current_link['id'];
+                $wpdb->query( $sql );
+            }
+
+            if ($_POST["test"]){
+                echo '<h3>Testing feed "'.$current_link['source'].'":</h3>';
                 $fetch = new Hypernews_Fetcher();
-                $result = $fetch->get_items($url, $search);
+                $result = $fetch->get_items($current_link);
                 
                 echo '<p>Found: '.sizeof($result['match']).'</p>';
                 foreach ($result['match'] as $key => $value) {
@@ -183,46 +172,13 @@ class Hypernews_Links extends WP_List_Table {
     }    
     
     function prepare_items() {
-        global $wpdb, $_wp_column_headers;
+        global $_wp_column_headers;
        
         $screen = get_current_screen();
+                
+        $this->process_bulk_action();
 
-        $table_name = $wpdb->prefix . "hypernews_links";
-        
-	/* -- Preparing your query -- */
-        $query = "SELECT * FROM ".$table_name;
-        $query.=' WHERE type="RSS" ';
-        
-    /* -- Ordering parameters -- */
-        //Parameters that are going to be used to order the result
-        $orderby = !empty($_GET["orderby"]) ? mysql_real_escape_string($_GET["orderby"]) : 'ASC';
-        $order = !empty($_GET["order"]) ? mysql_real_escape_string($_GET["order"]) : '';
-        if(!empty($orderby) & !empty($order)){ $query.=' ORDER BY '.$orderby.' '.$order; }
-
-        /* -- Pagination parameters -- */
-        //Number of elements in your table?
-        $totalitems = $wpdb->query($query); //return the total number of affected rows
-        //How many to display per page?
-        $perpage = 20;
-        //Which page is this?
-        $paged = !empty($_GET["paged"]) ? mysql_real_escape_string($_GET["paged"]) : '';
-        //Page Number
-        if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ $paged=1; }
-        //How many pages do we have in total?
-        $totalpages = ceil($totalitems/$perpage);
-        //adjust the query to take pagination into account
-        if(!empty($paged) && !empty($perpage)){
-            $offset=($paged-1)*$perpage;
-        $query.=' LIMIT '.(int)$offset.','.(int)$perpage;
-        }
-
-        /* -- Register the pagination -- */
-        $this->set_pagination_args( array(
-                "total_items" => $totalitems,
-                "total_pages" => $totalpages,
-                "per_page" => $perpage,
-        ) );
-        //The pagination links are automatically built according to those parameters
+        $settings = new Hypernews_Settings();
 
         $columns = $this->get_columns();
         $hidden = $this->get_hidden_columns();
@@ -231,7 +187,7 @@ class Hypernews_Links extends WP_List_Table {
         $this->_column_headers = array($columns, $hidden, $sortable);
 
         /* -- Fetch the items -- */
-        $this->items = $wpdb->get_results($query,ARRAY_A);
+        $this->items = $settings->links();
         
     }
     
@@ -240,7 +196,8 @@ class Hypernews_Links extends WP_List_Table {
             'id' => 'Id',
             'source'     => __('Source','hypernews'),
             'channel'    => __('Channel','hypernews'),
-            'url'  => __('RSS-Url','hypernews')
+            'url'  => __('RSS-Url','hypernews'),
+            'posttypes' => __('Post types','hypernews')
         );
         return $columns;
     }
@@ -255,13 +212,26 @@ class Hypernews_Links extends WP_List_Table {
         return $result;
     }
     
+    function get_bulk_actions() {
+        
+        $actions['new_link'] = __('Add new RSS Feed', 'hypernews');
+        
+        return $actions;
+    }
+    
+    function process_bulk_action() {
+
+        if ($this->current_action() === 'new_link'){
+            echo '<SCRIPT> document.location="?page=hypernews_links&id=0"; </SCRIPT>';
+            return;
+        }
+        
+    }
+    
     function extra_tablenav( $which ) 
     {
         if ( $which == "top" )
         {
-        ?>
-            <input onclick="document.location='?page=hypernews_links&id=0';" type="button" class="button-secondary" value="<?php _e('Add new RSS-url', 'hypernews') ?>" />
-        <?php
         }
         if ( $which == "bottom" ){
         }
@@ -270,8 +240,8 @@ class Hypernews_Links extends WP_List_Table {
     function column_source($item){
         //Build row actions
         $actions = array(
-            'edit'      => sprintf('<a href="?page=%s&id=%d">'.__('Edit','hypernews').'</a>',$_REQUEST['page'],$item['id']),
-            'delete'      => sprintf('<a onclick="return confirm(\''.__('Confirm delete this source!','hypernews').'\');" href="?page=%s&id=%d&delete=true">'.__('Delete','hypernews').'</a>',$_REQUEST['page'],$item['id'])
+            'edit'      => sprintf('<a href="?page=%1$s&id=%2$s">'.__('Edit','hypernews').'</a>',$_REQUEST['page'],$item['id']),
+            'delete'      => sprintf('<a onclick="return confirm(\''.__('Confirm delete this source!','hypernews').'\');" href="?page=%s&id=%s&delete=true">'.__('Delete','hypernews').'</a>',$_REQUEST['page'],$item['id'])
         );
         
         //Return the title contents
@@ -286,12 +256,37 @@ class Hypernews_Links extends WP_List_Table {
         return $item['channel'];
     }
     
+    function column_id($item){
+        return $item['id'];
+    }
+    
     function column_url($item){
         return $item['url'];
     }
     
+    function column_posttypes($item){
+        $result = "";
+        $posttypes = $item['posttypes'];
+        if (is_array($posttypes)){
+            foreach ($posttypes as $key => $value) {
+                if (strlen($result)>0) { $result.=', '; }
+                $result.=$value;
+            }
+        }
+        return $result;
+    }
     
     function column_default($item, $column_name){
+        switch($column_name){
+            default:
+                return print_r($item,true); //Show the whole array for troubleshooting purposes
+        }
+    }
+}
+
+
+?>
+   function column_default($item, $column_name){
         switch($column_name){
             default:
                 return print_r($item,true); //Show the whole array for troubleshooting purposes

@@ -1,120 +1,163 @@
 <?php
 
-function hypernews_maxchars()
-{
-   
-    $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
-    if (is_numeric($hypernews_settings['maxchars']))
-    {
-        return $hypernews_settings['maxchars'];
-    }
-    else
-    {
-        return 99;
-    }
+function hypernews_settings(){
+    $settings = new Hypernews_Settings();
+    $settings->display();
 }
 
-function hypernews_removechars()
-{
-    $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
-    if (is_numeric($hypernews_settings['removechars']))
-    {
-        return $hypernews_settings['removechars'];
-    }
-    else
-    {
-        return 0;
-    }
-}
+class Hypernews_Settings{
 
-function hypernews_maxage()
-{
-   
-    $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
-    if (is_numeric($hypernews_settings['maxage']))
-    {
-        return $hypernews_settings['maxage'];
+    private function get(){
+        $settings = array(
+            'Links' => array(), //List of Links
+            'Browsers' => array()
+        );
+        $settings = get_option( 'hypernews_settings', $settings );
+        return $settings;
     }
-    else
-    {
-        return 168;
-    }
-}
 
-function hypernews_settings() {
-    // GLOBALS
-    global $wpdb;
-    global $current_user; get_currentuserinfo(); // get current user info
-    
-    $hypernews_settings = array('maxchars' => '255', 'removechars' => '0', 'maxage' => '168' );
-
-    $hypernews_settings = get_option( 'hypernews-settings', $hypernews_settings );
-    
-    if ( isset( $_REQUEST['hypernews-update'] ) )
-    {
-        $hypernews_settings['maxchars'] = $_REQUEST['hypernews-maxchars'];        
-        $hypernews_settings['removechars'] = $_REQUEST['hypernews-removechars'];        
-        $hypernews_settings['maxage'] = $_REQUEST['hypernews-maxage'];        
-        $hypernews_settings['posttypes'] = $_REQUEST['hypernews-posttypes'];
-        update_option('hypernews-settings', $hypernews_settings);
-        
-        if (isset($_REQUEST['hypernews-clear'])){
-            $table_name = $wpdb->prefix . "hypernews_store";
-            $sql = "DELETE FROM ".$table_name;
-            $wpdb->query( $sql );
-            set_transient( 'hypernews_cache_unread', NULL);
-            echo "<script>document.location='?page=hypernews&fetch=true';</script>";
+    public function delete_link($id){
+        $settings = $this->get();
+        foreach ($settings['Links'] as $key => $value) {
+            if ($id == $value['id']) {
+                unset($settings['Links'][$key]);
+                break;
+                }
         }
-        
+        update_option('hypernews_settings', $settings);
     }
     
+    public function links(){
+        $settings = $this->get();
+        return $settings['Links'];
+    }
     
-?>
+    public function get_link($id = 0){
+        
+        $settings = $this->get();
+        foreach ($settings['Links'] as $key => $value) {
+            if ($id == $value['id']) return $value;
+        }
+
+        $result = array(
+            'id' => uniqid(),
+            'source' => 'Your RSS-feed name',
+            'channel' => 'My own channel / department',
+            'url' => 'http://rss.cnn.com/rss/edition.rss',
+            'search' => '',
+            'maxchars' => '0',
+            'removechars' => '0',
+            'maxage' => '0',
+            'sort_order' => '100',
+            'posttypes' => array()
+        );
+
+        return $result;
+    }
+    
+    public function set_link($link){
+        $settings = $this->get();
+        foreach ($settings['Links'] as $key => $value) {
+            if ($link['id'] == $value['id']) {
+                $settings['Links'][$key] = $link;
+                $found = true;
+                break;
+                }
+        }
+        if (!$found){
+            $settings['Links'][] = $link;
+        }
+        update_option('hypernews_settings', $settings);
+    }
+
+    
+    
+    
+    
+    public function display() {
+        // GLOBALS
+        global $wpdb;
+        global $current_user; 
+        get_currentuserinfo(); // get current user info
+
+//                echo "<script>document.location='?page=hypernews&fetch=true';</script>";
+        ?>
     <div class="wrap">
         <div id="icon-options-general" class="icon32"><br/></div><h2><?php _e('Settings', 'hypernews'); ?></h2>
+        <?php
         
-        <form method="post" >
-            
-            <table class="form-table">
+        print_r($this->get());
+        
+        echo '</div>';
+    } 
 
-                <tr valign="top">
-                    <th scope="row"><?php _e('Strikethrough text after n-characters:', 'hypernews'); ?></th>
-                    <td><input size="5" type="text" name="hypernews-maxchars" value="<?php echo hypernews_maxchars() ?>" />&nbsp;
-                    <?php _e('( 0 = disabled )', 'hypernews'); ?></td>
-                </tr>
+    
+    
+    public function delete_browser($id){
+        $settings = $this->get();
+        foreach ($settings['Browsers'] as $key => $value) {
+            if ($id == $value['id']) {
+                unset($settings['Browsers'][$key]);
+                break;
+                }
+        }
+        update_option('hypernews_settings', $settings);
+    }
+    
+    public function browsers(){
+        $settings = $this->get();
+        return $settings['Browsers'];
+    }
+    
+    public function get_browser($id = 0){
+        
+        $settings = $this->get();
+        foreach ($settings['Browsers'] as $key => $value) {
+            if ($id == $value['id']) return $value;
+        }
 
-                <tr valign="top">
-                    <th scope="row"><?php _e('Remove text after n-characters:', 'hypernews'); ?></th>
-                    <td><input size="5" type="text" name="hypernews-removechars" value="<?php echo hypernews_removechars() ?>" />&nbsp;
-                    <?php _e('( 0 = disabled )', 'hypernews'); ?></td>
-                </tr>
+        $result = array(
+            'id' => uniqid(),
+            'source' => 'Your browser name',
+            'channel' => 'My own channel / department',
+            'url' => 'http://www.cnn.com/',
+            'sort_order' => '100',
+        );
 
-                <tr valign="top">
-                    <th scope="row"><?php _e('Delete RSS-items older than:', 'hypernews'); ?></th>
-                    <td><input size="5" type="text" name="hypernews-maxage" value="<?php echo hypernews_maxage() ?>" /> <?php _e('hours', 'hypernews'); ?></td>
-                </tr>
+        return $result;
+    }
+    
+    public function set_browser($link){
+        $settings = $this->get();
+        foreach ($settings['Browsers'] as $key => $value) {
+            if ($link['id'] == $value['id']) {
+                $settings['Browsers'][$key] = $link;
+                $found = true;
+                break;
+                }
+        }
+        if (!$found){
+            $settings['Browsers'][] = $link;
+        }
+        update_option('hypernews_settings', $settings);
+    }
+    
+    public function get_browsers_by_channel($channel){
 
-                <tr valign="top">
-                    <th scope="row"><?php _e('Publish to:', 'hypernews'); ?></th>
-                    <td>
-                        <?php
-                            $post_types=get_post_types('','names'); 
-                            foreach ($post_types as $post_type ) 
-                            {
-                                echo '<input type="checkbox" name="hypernews-posttypes[]" value="'.$post_type.'" ';
-                                
-                                if (in_array($post_type, $hypernews_settings['posttypes']))
-                                {
-                                    echo ' checked';
-                                }
-                                
-                                echo '> '. $post_type. '<br/>';
-                            }
-                        ?>
-                    </td>
-                </tr>
-                
-                <tr valign="top">
+        $result = array();
+        $settings = $this->get();
+        foreach ($settings['Browsers'] as $key => $value) {
+            if ($channel == $value['channel']) $result[] = $value;
+        }
+
+        return $result;
+    }
+    
+    
+} //end of class hypernews_settings
+
+
+?>        <tr valign="top">
                     <th scope="row"><?php _e('Clear all items from store:', 'hypernews'); ?></th>
                     <td><input type="checkbox" name="hypernews-clear" /> <?php _e('Hypernews will fetch new items directly.', 'hypernews'); ?></td>
                 </tr>

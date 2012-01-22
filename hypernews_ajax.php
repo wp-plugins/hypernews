@@ -1,6 +1,5 @@
 <?php
 
-
 add_action('wp_ajax_hypernews_update_status', 'hypernews_update_status');
 
 function hypernews_update_status()
@@ -92,16 +91,19 @@ function hypernews_publish()
     {
         die("0");
     }
+
+    $settings = new Hypernews_Settings();
+    $link = $settings->get_link($row->link_id);
     
     //Mark text with overflow!
     $text = strip_tags($row->description);
     
-    $remove_chars = hypernews_removechars();
+    $remove_chars = $link['removechars'];
     if ($remove_chars>0 && strlen($text) > $remove_chars){
         $text = substr($text, 0, $remove_chars);
     }
     
-    $max_chars = hypernews_maxchars();
+    $max_chars = $link['maxchars'];
     if ($max_chars>0 && strlen($text) > $max_chars)
     {
         $text = substr($text, 0, $max_chars) . '<del>' . substr($text, $max_chars) . '</del>';
@@ -127,12 +129,10 @@ function hypernews_publish()
 
     //SLÅ UPP link_id och hämta namnet på källan!
     if ($row->link_id){
-        $table_name_links = $wpdb->prefix . "hypernews_links";
-        $link = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".$table_name_links." WHERE id = '".$row->link_id."';" ) );
-        $meta['link_id'] = $link->id;
-        $meta['source'] = $link->source;
-        $meta['feed'] = $link->url;
-        $meta['channel'] = $link->source;
+        $meta['link_id'] = $link['id'];
+        $meta['source'] = $link['source'];
+        $meta['feed'] = $link['url'];
+        $meta['channel'] = $link['channel'];
         add_post_meta($post_id, 'hypernews_metabox', $meta, true);
     }
     
@@ -152,6 +152,17 @@ function hypernews_publish()
     );
 
     $result = $wpdb->query($sql);
+    
+    if (!$result)
+    {
+        die('0');
+    }
+    
+    echo "result 1 OK!";
+}
+
+?>
+l);
     
     if (!$result)
     {

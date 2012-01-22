@@ -3,7 +3,7 @@ Contributors: EkAndreas
 Tags: news,rss,flow,monitor,publish,editorial,cms
 Requires at least: 3.2
 Tested up to: 3.3.1
-Stable tag: 0.4
+Stable tag: 0.5
 
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
@@ -52,6 +52,14 @@ To use the data in the post metabox for developers: Post meta name is 'hypernews
 5. Click the icon to get to the edit page or post.
 
 == Changelog ==
+
+= 0.5 = 
+* Links moved from db to plugin-options in WP. All your Links will be blank after update! Please write them down before upgrade!
+* MaxChars and RemoveChars moved to Links.
+* Post types moved to Links
+* Settings are removed and replaced by settings in each Link-setting.
+* Browser Lists added (to manually open browser windows in case of missing RSS-feeds)
+* Some text and menu updates
 
 = 0.4 =
 * Testing feeds in link dialog -function added

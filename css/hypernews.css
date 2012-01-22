@@ -22,23 +22,32 @@
 }
 
 a.hypernews_publish_row {
-    padding: 2px;
+    /*background:url(../img/button.gif);
+    color:#555555;*/
+    font-weight:normal;
+    height:20px;
+    line-height:19px;
+    margin-bottom:14px;
+    text-decoration:none;
+    float:left;
+    margin-right: 4px;
+    padding-right: 4px;
 }
 
 a.hypernews_publish_row:hover {
     background-color: gray;
     color:white;
-    padding: 2px;
+}
+
+.hypernews_publish_add { 
+    padding-top:2px;
+    background:url(../img/add.png) no-repeat 3px 3px;
+    text-indent:20px;
+    display:block;   
 }
 
 .hypernews_pre_row {
-    white-space: nowrap;
-    font-style: italic;
-    color: #666;
-}
-
-.hypernews_pre_row {
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     font-style: italic;
     color: #666;
 }

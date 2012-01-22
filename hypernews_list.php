@@ -97,6 +97,7 @@ class Hypernews_List extends WP_List_Table
 
         if ($this->current_action() === 'only_show'){
             update_user_meta( $current_user->ID, "hypernews_channel", NULL);
+            $this->reload_page();
             return;
         }
 
@@ -104,6 +105,7 @@ class Hypernews_List extends WP_List_Table
             $current = $this->current_action();
             if ($current == $value){
                 update_user_meta( $current_user->ID, "hypernews_channel", $value);
+                $this->reload_page();
                 return;
             }
         }
@@ -112,16 +114,11 @@ class Hypernews_List extends WP_List_Table
     
     function channels()
     {
-        global $wpdb;
         $result = array();
-        
-        $table_name = $wpdb->prefix . "hypernews_links";
-        
-	/* -- Preparing your query -- */
-        $query = "SELECT DISTINCT(channel) FROM ".$table_name;
-        $rows = $wpdb->get_results($query);
-        foreach ($rows as $key => $value) {
-            $result[] = $value->channel;
+        $settings = new Hypernews_Settings();
+        $links = $settings->links();
+        foreach ($links as $key => $value) {
+            if (!in_array($value['channel'], $result)) $result[] = $value['channel'];
         }
         return $result;
     }
@@ -137,6 +134,7 @@ function get_columns() {
         'status'=>'<img src="'.WP_PLUGIN_URL.'/hypernews/img/tag.png" />',
         'title'=>__('Headline', 'hypernews'),
         'pubdate'=>__('Published', 'hypernews'),
+        'channel'=>__('Channel', 'hypernews'),
         'source'=>__('Source', 'hypernews'),
         'notes'=>__('Note', 'hypernews')
     );
@@ -148,10 +146,11 @@ function get_columns() {
  */
 public function get_sortable_columns() {
 	return $sortable = array(
-		'source' => array('l.source',false),
-		'status' => array('s.status',false),
-		'title' => array('s.title',false),
-                'pubdate' => array('s.pubdate',false)
+		'channel' => array('channel',false),
+		'source' => array('source',false),
+		'status' => array('status',false),
+		'title' => array('title',false),
+                'pubdate' => array('pubdate',false)
 	);
 }
 
@@ -171,12 +170,11 @@ function prepare_items() {
         $screen = get_current_screen();
 
         $table_name = $wpdb->prefix . "hypernews_store";
-        $table_name2 = $wpdb->prefix . "hypernews_links";
         
         $this->process_bulk_action();
         
 	/* -- Preparing your query -- */
-        $query = "SELECT s.*, l.source FROM ".$table_name." s INNER JOIN ".$table_name2." l ON s.link_id=l.id";
+        $query = "SELECT * FROM ".$table_name;
         
         $channel = get_user_meta($current_user->ID, "hypernews_channel");
         if (sizeof($channel)>0) $channel = $channel[0];
@@ -185,7 +183,7 @@ function prepare_items() {
         if (!$this->hidden) 
         {
             if (strlen($where)==0) $where = ' WHERE ';
-            $where.='s.status!="HIDE" ';
+            $where.='status!="HIDE" ';
         }
         if (strlen($channel)>0) 
         {
@@ -193,7 +191,7 @@ function prepare_items() {
                 $where = ' WHERE ';
             else
                 $where.=' AND ';
-            $where.='s.channel="'.$channel.'" ';
+            $where.='channel="'.$channel.'" ';
         }
         $query.= $where;
         
@@ -202,7 +200,7 @@ function prepare_items() {
     /* -- Ordering parameters -- */
         
         //Parameters that are going to be used to order the result
-        $orderby = !empty($_GET["orderby"]) ? mysql_real_escape_string($_GET["orderby"]) : 's.pubdate';
+        $orderby = !empty($_GET["orderby"]) ? mysql_real_escape_string($_GET["orderby"]) : 'pubdate';
         $order = !empty($_GET["order"]) ? mysql_real_escape_string($_GET["order"]) : 'desc';
         if(!empty($orderby) & !empty($order)){ $query.=' ORDER BY '.$orderby.' '.$order; }
 
@@ -242,36 +240,14 @@ function prepare_items() {
         
 }
 
-function publish_channel($id)
-{
-    //world_add.png
-    $result = '';
-    
-    $hypernews_settings = get_option( 'hypernews-settings' );
-    $posttypes = $hypernews_settings['posttypes'];
-    
-    //echo var_export($hypernews_settings);
-    
-    foreach ($posttypes as $type)
-    {
-        if ($result!='')
-        {
-            $result.='&nbsp;&nbsp;&nbsp;&nbsp;';
-        }
-        
-        $result.='<a href="#" row_id="'.$id.'" posttype="'.$type.'" class="hypernews_publish_row" title="'.__('Add as draft to', 'hypernews').' '.$type.'"><img src="'.WP_PLUGIN_URL.'/hypernews/img/page_white_add.png" /> '.$type.'</a>';
-    }
-    
-    
-    return $result;
-}
-
 /**
  * Display the rows of records in the table
  * @return string, echo the markup of the rows
  */
 function display_rows() {
 
+        $settings = new Hypernews_Settings();
+    
 	//Get the records registered in the prepare_items method
 	$records = $this->items;
 
@@ -324,7 +300,7 @@ function display_rows() {
                                 //Return the title contents
                                 echo sprintf('<td><a class="%7$s" href="%6$s" target="_new">%1$s</a><br/><div class="hypernews_pre_row hypernews_row_pre_%4$s"><i>%2$s</i></div><div class="hypernews_hidden_row hypernews_row_%4$s">%5$s</div>%3$s</td>',
                                     /*$1%s*/ $rec->title,
-                                    /*$2%s*/ substr(strip_tags($rec->description),0,100),
+                                    /*$2%s*/ substr(strip_tags($rec->description),0,150),
                                     /*$3%s*/ $this->row_actions($actions),
                                         $rec->id,
                                         strip_tags($rec->description),
@@ -335,13 +311,30 @@ function display_rows() {
                                 //echo '<td '.$attributes.'><strong><a href="'.$editlink.'" title="Edit">'.stripslashes($rec->title).'</a></strong></td>'; 
                                 break;
                             case "pubdate": 	
-                                echo sprintf('<td %3$s>%1$s<br/>'.$this->publish_channel($rec->id).'</td>',
+                                
+                                //Channels:
+                                $pb_result = "";
+                                $link = $settings->get_link($rec->link_id);
+                                $posttypes = $link['posttypes'];
+                                if (!is_array($posttypes)) $posttypes = array();
+                                foreach ($posttypes as $type)
+                                {
+                                    $posttype_object = get_post_type_object($type);
+                                    if ($pb_result!='')
+                                    {
+                                        $pb_result.='&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    }
+
+                                    $pb_result.='<a href="#" row_id="'.$rec->id.'" posttype="'.$type.'" class="hypernews_publish_row" title="'.__('Add as draft to', 'hypernews').' '.$type.'"><span class="hypernews_publish_add">'.$posttype_object->label.'</a>';
+                                }
+                                echo sprintf('<td %3$s>%1$s<br/>'.$pb_result.'<div style="clear:both;"></div></td>',
                                         stripslashes($rec->pubdate),
                                         $rec->id,
                                         $attributes
                                 );
                                 
                                 break;
+                            case "channel": echo '<td '.$attributes.'>'.stripslashes($rec->channel).'</td>';	break;
                             case "source": echo '<td '.$attributes.'>'.stripslashes($rec->source).'</td>';	break;
                             case "status":
                                 echo '<td '.$attributes.'>';
