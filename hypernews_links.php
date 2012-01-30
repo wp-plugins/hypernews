@@ -286,13 +286,3 @@ class Hypernews_Links extends WP_List_Table {
 
 
 ?>
-   function column_default($item, $column_name){
-        switch($column_name){
-            default:
-                return print_r($item,true); //Show the whole array for troubleshooting purposes
-        }
-    }
-}
-
-
-?>

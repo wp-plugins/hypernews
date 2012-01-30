@@ -162,14 +162,3 @@ function hypernews_publish()
 }
 
 ?>
-l);
-    
-    if (!$result)
-    {
-        die('0');
-    }
-    
-    echo "result 1 OK!";
-}
-
-?>

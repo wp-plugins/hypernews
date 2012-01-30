@@ -157,23 +157,4 @@ class Hypernews_Settings{
 } //end of class hypernews_settings
 
 
-?>        <tr valign="top">
-                    <th scope="row"><?php _e('Clear all items from store:', 'hypernews'); ?></th>
-                    <td><input type="checkbox" name="hypernews-clear" /> <?php _e('Hypernews will fetch new items directly.', 'hypernews'); ?></td>
-                </tr>
-                
-            </table>
-
-            <p class="submit">
-            <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'hypernews') ?>" />
-            <input type="hidden" name="hypernews-update" value="true" />
-            </p>
-            
-        </form>
-        
-    </div>
-<?php
-} 
-
-
 ?>
