@@ -5,6 +5,11 @@ Requires at least: 3.2
 Tested up to: 3.3.1
 Stable tag: 0.6
 
+THIS PLUGIN IS NO LONGER MAINTAINED!
+PLEASE GO TO PLUGIN  - NEWSFLOW - INSTEAD!
+
+[Newsflow http://wordpress.org/extend/plugins/newsflow/]
+
 Editorial support, very fast user interface to manually select and publish RSS streams to your WordPress site/blog.
 
 == Description ==
